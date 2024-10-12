@@ -1,0 +1,3 @@
+@andino-labs:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=<your-token>
+registry=https://registry.npmjs.org
