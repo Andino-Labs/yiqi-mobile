@@ -1,12 +1,19 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import trpc from "@/constants/trpc";
-
+import { useRouter } from "expo-router";
 export default function HomeScreen() {
+  const router = useRouter();
   const { data, error, failureReason } = trpc.searchUsers.useQuery({
     query: "bilbo",
   });
@@ -55,6 +62,23 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <TouchableOpacity
+        style={[styles.button, styles.secondaryButton]}
+        onPress={() => router.push("/eventList")}
+      >
+        <Text style={[styles.buttonText, styles.secondaryButtonText]}>
+          Events
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, styles.secondaryButton]}
+        onPress={() => router.push("/auth")}
+      >
+        <Text style={[styles.buttonText, styles.secondaryButtonText]}>
+          Salir
+        </Text>
+      </TouchableOpacity>
     </ParallaxScrollView>
   );
 }
@@ -75,5 +99,25 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute",
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 25,
+    marginBottom: 15,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  secondaryButton: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#007AFF",
+  },
+  secondaryButtonText: {
+    color: "#007AFF",
   },
 });
