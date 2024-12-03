@@ -6,10 +6,8 @@ import { ThemedView } from "@/components/ThemedView";
 import trpc from "@/constants/trpc";
 
 export default function HomeScreen() {
-  const { data, error, failureReason } = trpc.searchUsers.useQuery({
-    query: "bilbo",
-  });
-
+  const { data, error, failureReason } = trpc.getPublicEvents.useQuery();
+  console.log(data);
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}

@@ -22,7 +22,7 @@ export default function RootLayout() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:3000/trpc",
+          url: "http://localhost:3000/api/trpc",
           transformer: SuperJSON,
           headers: () => ({
             authorization: "add the cookie here",
