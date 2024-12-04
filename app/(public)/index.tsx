@@ -1,16 +1,20 @@
-import { Image, Platform } from "react-native";
-import { HelloWave } from "@/components/HelloWave";
+import {Button, Image, Platform} from "react-native";
+import {HelloWave} from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import {ThemedText} from "@/components/ThemedText";
+import {ThemedView} from "@/components/ThemedView";
 import trpc from "@/constants/trpc";
+import {useRouter} from "expo-router";
 
 export default function HomeScreen() {
-  const { data, error, failureReason } = trpc.getPublicEvents.useQuery();
-  console.log(data);
+  const {data, error, failureReason} = trpc.getPublicEvents.useQuery();
+  console.log("data", data);
+  console.log("error", error);
+  console.log("failureReason", failureReason);
+  const router = useRouter();
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+      headerBackgroundColor={{light: "#A1CEDC", dark: "#1D3D47"}}
       headerImage={
         <Image source={require("@/assets/images/partial-react-logo.png")} />
       }
@@ -26,7 +30,7 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
           to see changes. Press{" "}
           <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
+            {Platform.select({ios: "cmd + d", android: "cmd + m"})}
           </ThemedText>{" "}
           to open developer tools.
         </ThemedText>
@@ -47,6 +51,7 @@ export default function HomeScreen() {
           directory. This will move the current{" "}
           <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          <Button onPress={() => router.push("/login")} title="login"></Button>
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
