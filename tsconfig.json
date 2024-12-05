@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "useUnknownInCatchVariables": false,
+    "types": ["nativewind/types"],
     "paths": {
       "@/*": ["./*"]
     }

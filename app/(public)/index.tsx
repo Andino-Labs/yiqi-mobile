@@ -5,12 +5,12 @@ import {ThemedText} from "@/components/ThemedText";
 import {ThemedView} from "@/components/ThemedView";
 import trpc from "@/constants/trpc";
 import {useRouter} from "expo-router";
+import {useSelectedLanguage} from "@/i18n/utils";
 
 export default function HomeScreen() {
   const {data, error, failureReason} = trpc.getPublicEvents.useQuery();
   console.log("data", data);
-  console.log("error", error);
-  console.log("failureReason", failureReason);
+  const {language, setLanguage} = useSelectedLanguage();
   const router = useRouter();
   return (
     <ParallaxScrollView
@@ -51,8 +51,15 @@ export default function HomeScreen() {
           directory. This will move the current{" "}
           <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-          <Button onPress={() => router.push("/login")} title="login"></Button>
         </ThemedText>
+        <Button onPress={() => router.push("/login")} title="login"></Button>
+        <ThemedView className="flex-row">
+          <ThemedText type="defaultSemiBold">
+            Selected Language : {language}
+          </ThemedText>
+          <Button title="EN" onPress={() => setLanguage("en")} />
+          <Button title="ES" onPress={() => setLanguage("es")} />
+        </ThemedView>
       </ThemedView>
     </ParallaxScrollView>
   );

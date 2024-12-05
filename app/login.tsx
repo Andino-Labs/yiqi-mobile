@@ -1,6 +1,5 @@
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import {SafeAreaView, TouchableOpacity, Linking} from "react-native";
-
 import {ThemedText} from "@/components/ThemedText";
 import {ThemedView} from "@/components/ThemedView";
 import {useAuth} from "@/hooks/useAuth";
@@ -8,87 +7,95 @@ import LogoSvg from "@/assets/svgs/LogoSvg";
 import LinkedInSvg from "@/assets/svgs/LinkedInSvg";
 import GoogleSvg from "@/assets/svgs/GoogleSvg";
 import LinkedInModal from "@/components/LinkedInModal";
+import {useTranslation} from "react-i18next";
 
 export default function Login() {
   const {onGoogleLogin, onLinkedInLogin} = useAuth();
-  // Open Support URL
-  const onSupportPress = () => {
+  const [isLinkedInModalVisible, setLinkedInModalVisible] = useState(false);
+
+  const handleSupportPress = () => {
     Linking.openURL("https://wa.me/51943056060").catch((err) =>
       console.error("Failed to open support URL:", err)
     );
   };
-  const [linkedInModalVisible, setLinkedInModalVisible] = useState(false);
-  const handleLinkedInBtnClicked = async () => {
-    setLinkedInModalVisible(true);
-  };
 
-  const handleLinkedInLoginCancel = () => {
-    console.log("handleLinkedInLoginCancel");
+  const handleLinkedInButtonPress = () => setLinkedInModalVisible(true);
 
+  const handleLinkedInLoginCancel = () => setLinkedInModalVisible(false);
+
+  const handleLinkedInLoginSuccess = async (authorizationCode: string) => {
     setLinkedInModalVisible(false);
-  };
-
-  const handleLinkedInLoginSuccess = async (authrozationCode: string) => {
-    setLinkedInModalVisible(false);
-    if (authrozationCode) {
-      await onLinkedInLogin(authrozationCode);
+    if (authorizationCode) {
+      await onLinkedInLogin(authorizationCode);
     } else {
-      console.log("cannot_get_access_token");
+      console.error("Cannot get access token");
     }
   };
+
+  const AuthButton = ({
+    onPress,
+    Icon,
+    text,
+  }: {
+    onPress: () => void;
+    Icon: React.FC;
+    text: string;
+  }) => (
+    <TouchableOpacity
+      onPress={onPress}
+      className="bg-black py-3 rounded-md flex-row justify-center items-center mb-4"
+    >
+      <Icon />
+      <ThemedText className="font-medium text-white ml-2">{text}</ThemedText>
+    </TouchableOpacity>
+  );
+  const {t} = useTranslation();
 
   return (
     <SafeAreaView className="bg-black flex-1 justify-center items-center px-5">
       <ThemedView
-        className="bg-gray-900"
+        className="bg-gray-900 border-r-4"
         style={{borderRadius: 10, padding: 10}}
       >
         <ThemedView className="bg-gray-900 items-center mb-8">
-          <LogoSvg
-            height={100}
-            width={100}
-            // fill={theme === "light" ? "black" : "white"}
-          />
+          <LogoSvg height={100} width={100} />
           <ThemedText className="text-white text-xl font-semibold">
-            Welcome to Yiqi
+            {t("loginScreen.welcome")}
           </ThemedText>
           <ThemedText className="text-gray-400 text-sm">
             Please sign in or sign up below
           </ThemedText>
         </ThemedView>
 
-        {/* Google Login */}
-        <TouchableOpacity
+        {/* Login Buttons */}
+        <AuthButton
           onPress={onGoogleLogin}
-          className="bg-black py-3 rounded-md flex-row justify-center items-center mb-4"
-        >
-          <GoogleSvg />
-          <ThemedText className="font-medium text-white ml-2">
-            Log in with Google
-          </ThemedText>
-        </TouchableOpacity>
+          Icon={GoogleSvg}
+          text={t("loginScreen.loginWith") + " Google"}
+        />
+        <AuthButton
+          onPress={handleLinkedInButtonPress}
+          Icon={LinkedInSvg}
+          text={t("loginScreen.loginWith") + " LinkedIn"}
+        />
 
-        {/* LinkedIn Login */}
-        <TouchableOpacity
-          onPress={handleLinkedInBtnClicked}
-          className="bg-black py-3 rounded-md flex-row justify-center items-center"
-        >
-          <LinkedInSvg />
-          <ThemedText className="font-medium text-white ml-2">
-            Log in with LinkedIn
+        {/* Support Section */}
+        <ThemedView className="border-t-slate-800 border-t-2 my-4" />
+        <ThemedText className="text-gray-400 text-sm">
+          {t("loginScreen.help") + " "}
+          <ThemedText
+            onPress={handleSupportPress}
+            className="text-white text-sm underline"
+            style={{textDecorationLine: "underline"}}
+          >
+            {t("loginScreen.technicalSupport")}
           </ThemedText>
-        </TouchableOpacity>
-
-        {/* Support */}
-        <ThemedText className="text-gray-400 text-sm mt-8 text-center">
-          In case of problems logging in, please contact{" "}
-          <TouchableOpacity onPress={onSupportPress}>
-            <ThemedText className="text-blue-400">technical support</ThemedText>
-          </TouchableOpacity>
         </ThemedText>
       </ThemedView>
+
+      {/* LinkedIn Modal */}
       <LinkedInModal
-        isVisible={linkedInModalVisible}
+        isVisible={isLinkedInModalVisible}
         onLoginCancel={handleLinkedInLoginCancel}
         onLoginSuccess={handleLinkedInLoginSuccess}
       />

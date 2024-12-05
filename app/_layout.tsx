@@ -12,6 +12,8 @@ import {httpBatchLink} from "@trpc/client";
 import * as SecureStore from "expo-secure-store";
 import {secureStorageKeys} from "@/constants/SecureStore";
 import {API} from "@/constants/apis";
+import "@/i18n";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
