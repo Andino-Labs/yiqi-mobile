@@ -20,3 +20,7 @@ expo-env.d.ts
 # @end expo-cli
 
 .npmrc
+
+.env
+android/
+ios/
