@@ -1,13 +1,13 @@
-import en from "@/translations/en";
-import es from "@/translations/es";
+import en from '@/translations/en'
+import es from '@/translations/es'
 
 export const resources = {
   en: {
-    translation: en,
+    translation: en
   },
   es: {
-    translation: es,
-  },
-};
+    translation: es
+  }
+}
 
-export type Language = keyof typeof resources;
+export type Language = keyof typeof resources

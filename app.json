@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -14,14 +14,22 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.andinolabs.yiqi"
+      "bundleIdentifier": "com.andinolabs.yiqi",
+      "config": {
+        "googleMapsApiKey": "maps_api_key_here_"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.andinolabs.yiqi"
+      "package": "com.andinolabs.yiqi",
+      "config": {
+        "googleMaps": {
+          "apiKey": "maps_api_key_here_"
+        }
+      }
     },
     "web": {
       "bundler": "metro",
@@ -33,11 +41,20 @@
       [
         "@react-native-google-signin/google-signin",
         {
-          "iosUrlScheme": "com.googleusercontent.apps.381802387190-dnvtsv8tke3tbhp5p60o2fhv1jt8nu5i"
+          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
         }
       ],
       "expo-secure-store",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/GeistMonoVF.woff",
+            "./assets/fonts/GeistVF.woff"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
