@@ -38,7 +38,6 @@ const LinkedInModal: FC<ILinkedInModalProps> = ({
 
     if (url.startsWith(callbackUrl)) {
       const code = getUrlParam(url, 'code') as string // Get authorization code from linkedin
-      console.log({ code, url })
 
       if (!code) {
         console.error('Cannot get authorization code from linkedin')

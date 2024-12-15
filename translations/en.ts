@@ -1,4 +1,21 @@
 export default {
+  general: {
+    eventTitle: 'Event Title',
+    location: 'Location',
+    startDate: 'Start Date',
+    eventType: 'Event Type',
+    virtual: 'Online',
+    onsite: 'In Person',
+    search: 'Search',
+    searchByTitle: 'Search by title',
+    selectLocation: 'Select location...',
+    events: 'Events',
+    communities: 'Communities',
+    going: 'Going',
+    reset: 'Reset',
+    apply: 'Apply',
+    showMore: 'Show all'
+  },
   loginScreen: {
     welcome: 'Welcome to Yiqi',
     signInOrSignUp: 'Please sign in or sign up below',
@@ -64,5 +81,28 @@ export default {
     registrationPaymentPendingDescription:
       'Your registration is pending payment. Please complete the payment to confirm your attendance.',
     registrationContinuePayment: 'Continue with Payment'
+  },
+  Home: {
+    HeroSection: {
+      heroSubtitle: 'The Future of Events',
+      heroTitle1: 'Create Unforgettable',
+      heroTitle2: 'Experiences',
+      heroDescription:
+        'Connect, celebrate, and create memories. Our platform makes it easy to discover and organize events that bring people together.',
+      heroCTA: 'Join your first event',
+      feature1Title: 'Smart Scheduling',
+      feature1Description:
+        'AI-powered event scheduling that adapts to your preferences and availability.',
+      feature2Title: 'Community Driven',
+      feature2Description:
+        'Connect with like-minded people and build lasting relationships.'
+    },
+    communityTitle: 'Featured Communities',
+    communitySubtitle:
+      'Join these amazing communities and connect with like-minded people',
+    eventsNear: 'Events near',
+    seeAllEvents: 'See all events',
+    noEventsFound: 'No events found',
+    noDescriptionAvailable: 'No description available'
   }
 }
