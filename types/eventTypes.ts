@@ -40,26 +40,25 @@ export type PublicEventType = {
   title: string
   startDate: Date
   endDate: Date
-  location?: string | null
-  city: string | null
-  state: string | null
-  country: string | null
-  virtualLink: string | null
-  description?: string
-  maxAttendees?: number | null
-  requiresApproval: boolean
-  openGraphImage: string | null
+  subtitle?: string | null | undefined
+  description?: string | undefined
+  location?: string | null | undefined
+  city?: string | null | undefined
+  state?: string | null | undefined
+  country?: string | null | undefined
+  virtualLink?: string | null | undefined
+  maxAttendees?: number | null | undefined
+  openGraphImage?: string | null | undefined
   type: EventTypeEnum
   organizationId: string
   createdAt: Date
   updatedAt: Date
   customFields?: CustomFieldType[]
-  tickets: TicketType[]
-  registrations: number
-  organization: OrganizationType
+  tickets?: TicketType[]
+  registrations?: number
+  organization?: OrganizationType
   heroImage?: string | null
   backgroundColor?: string | null
   featuredIn?: FeaturedItemType[] | null
-  subtitle?: string | null
   hosts?: HostType[] | null
 }

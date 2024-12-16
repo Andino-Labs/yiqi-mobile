@@ -40,7 +40,6 @@ const useStripeCheckout = ({
           merchantDisplayName: 'Yiqi',
           style: 'alwaysDark'
         })
-        console.log(error)
 
         if (error) {
           throw new Error(
@@ -72,8 +71,6 @@ const useStripeCheckout = ({
       const { error } = await presentPaymentSheet()
 
       if (error) {
-        console.log(error)
-
         showToast('Payment failed!', { type: 'error' })
       } else {
         showToast('Payment Successful')

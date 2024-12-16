@@ -1,11 +1,10 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { ThemedText } from '@/components/ThemedText'
 import trpc from '@/constants/trpc'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Image } from 'expo-image'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import Registration from '@/components/Event/Registration'
-import { PublicEventType } from '@/types/eventTypes'
 import EventDescription from '@/components/Event/EventDetails/EventDescription'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import LocationMap from '@/components/LocationMap'
@@ -15,6 +14,9 @@ import { UserType } from '@/types/UserType'
 import * as SecureStore from 'expo-secure-store'
 import { secureStorageKeys } from '@/constants/SecureStore'
 import { errorHandler } from '@/helpers/errorHandler'
+import { ArrowLeft } from 'lucide-react-native'
+import { Colors } from '@/constants/Colors'
+import { PublicEventType } from '@/types/eventTypes'
 
 export default function EventDetails() {
   const { eventId } = useLocalSearchParams<{ eventId: string }>()
@@ -37,7 +39,11 @@ export default function EventDetails() {
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-black justify-center items-center">
-        <Text className="text-white">Loading event details...</Text>
+        <ActivityIndicator
+          className=" py-2"
+          size="large"
+          color={Colors.dark.tint}
+        />
       </SafeAreaView>
     )
   }
@@ -54,7 +60,8 @@ export default function EventDetails() {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Stack.Screen
         options={{
-          title: data?.title || 'Event Title'
+          title: data?.title || '',
+          headerLeft: () => <ArrowLeft />
         }}
       />
       <SafeAreaView className="flex-1 bg-black px-5 py-2">
@@ -71,7 +78,7 @@ export default function EventDetails() {
 
         {/* Event Title */}
         <ThemedText className="text-white text-2xl font-bold mb-2">
-          {data?.title || 'Event Title'}
+          {data?.title}
         </ThemedText>
 
         {/* Event Date and Location */}

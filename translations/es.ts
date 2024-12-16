@@ -1,4 +1,21 @@
 export default {
+  general: {
+    eventTitle: 'Nombre del Evento',
+    location: 'Lugar',
+    startDate: 'Fecha de Inicio',
+    eventType: 'Tipo de Evento',
+    virtual: 'En línea',
+    onsite: 'Presencial',
+    search: 'Buscar',
+    searchByTitle: 'Buscar por nombre',
+    selectLocation: 'Seleccionar el lugar...',
+    events: 'Eventos',
+    communities: 'Comunidades',
+    Going: 'Asistirán',
+    reset: 'Restablecer',
+    apply: 'Aplicar',
+    showMore: 'Mostrar más'
+  },
   loginScreen: {
     welcome: 'Bienvenido a Yiqi',
     signInOrSignUp: 'Por favor, inicie sesión o regístrese a continuación',
@@ -67,5 +84,28 @@ export default {
     stripeAccountActiveDescription:
       'Tu cuenta de Stripe está completamente configurada y lista para aceptar pagos.',
     stripeViewDashboard: 'Ver panel de Stripe'
+  },
+  Home: {
+    HeroSection: {
+      heroSubtitle: 'El Futuro de los Eventos',
+      heroTitle1: 'Crea Inolvidables',
+      heroTitle2: 'Experiencias',
+      heroDescription:
+        'Conecta, celebra y crea recuerdos. Nuestra plataforma facilita descubrir y organizar eventos que unen a las personas.',
+      heroCTA: 'Únete a tu primer evento',
+      feature1Title: 'Programación Inteligente',
+      feature1Description:
+        'Planificación de eventos impulsada por IA que se adapta a tus preferencias y disponibilidad.',
+      feature2Title: 'Impulsado por la Comunidad',
+      feature2Description:
+        'Conecta con personas afines y construye relaciones duraderas.'
+    },
+    communityTitle: 'Comunidades Destacadas',
+    communitySubtitle:
+      'Únete a estas increíbles comunidades y conecta con personas afines',
+    eventsNear: 'Ver todos los eventos',
+    seeAllEvents: 'Ver todos los eventos',
+    noEventsFound: 'No se encontraron eventos',
+    noDescriptionAvailable: 'No hay descripción disponible'
   }
 }

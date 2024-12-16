@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Text, StyleProp, ViewStyle, Pressable } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle
+} from 'react-native'
 import {
   Calendar,
   MapPin,
@@ -11,7 +17,7 @@ import { PublicEventType } from '@/types/eventTypes'
 import { Image } from 'expo-image'
 import { useTranslation } from 'react-i18next'
 
-const EventCard: React.FC<{
+const EventListCard: React.FC<{
   event: PublicEventType
   onEventPress: (eventId: string) => void
   styles?: StyleProp<ViewStyle>
@@ -40,22 +46,21 @@ const EventCard: React.FC<{
   const { t } = useTranslation()
 
   return (
-    <Pressable
-      className="flex-1 bg-neutral-900 shadow-md rounded-lg"
-      onPress={() => onEventPress(id)}
+    <TouchableOpacity
       style={styles}
+      onPress={() => onEventPress(id)}
+      className="flex-1 bg-neutral-900 rounded-lg shadow-md w-full flex-row overflow-hidden my-2"
     >
-      <View className="min-h-[130px] overflow-hidden">
+      <View className="w-1/3 p-1">
         {openGraphImage ? (
           <Image
             source={{ uri: openGraphImage }}
             contentFit="cover"
-            className="w-full aspect-video"
-            style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }}
+            className="h-full w-full rounded-lg"
           />
         ) : (
-          <View className="flex-1 items-center justify-center">
-            <ImageOff color="gray" size={50} />
+          <View className="bg-neutral-800 flex items-center justify-center h-full w-full rounded-lg">
+            <ImageOff color={'gray'} size={50} />
           </View>
         )}
       </View>
@@ -63,7 +68,7 @@ const EventCard: React.FC<{
       <View className="p-4 flex-1">
         <Text className="text-white font-bold text-lg">{title}</Text>
 
-        <View className="mt-4">
+        <View className="mt-2">
           <View className="flex-row items-center mb-2">
             <Calendar size={16} color="white" />
             <Text className="text-gray-300 text-sm ml-2">{formattedDate}</Text>
@@ -73,11 +78,8 @@ const EventCard: React.FC<{
             <Text className="text-gray-300 text-sm ml-2">{location}</Text>
           </View>
         </View>
-      </View>
 
-      {/* Footer with border and bottom border radius */}
-      <View className="p-1 bg-neutral-800">
-        <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center justify-between mt-4">
           <View className="flex-row items-center">
             {organization?.logo ? (
               <Image
@@ -101,8 +103,8 @@ const EventCard: React.FC<{
           </View>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 
-export default EventCard
+export default EventListCard

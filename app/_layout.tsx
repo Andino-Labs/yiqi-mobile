@@ -69,15 +69,8 @@ export default function RootLayout() {
       <trpc.Provider client={trpcClient} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
           <RootSiblingParent>
-            <Stack>
-              <Stack.Screen
-                name="(public)/index"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="private/index"
-                options={{ headerShown: false }}
-              />
+            <Stack initialRouteName="(tabs)">
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="login" options={{ headerShown: false }} />
               <Stack.Screen name="+not-found" />
             </Stack>
