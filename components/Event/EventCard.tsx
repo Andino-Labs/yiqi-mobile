@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle
-} from 'react-native'
+import { View, Text, StyleProp, ViewStyle, Pressable } from 'react-native'
 import {
   Calendar,
   MapPin,
@@ -44,13 +38,14 @@ const EventCard: React.FC<{
     hour12: true
   })
   const { t } = useTranslation()
+
   return (
-    <TouchableOpacity
-      style={styles}
+    <Pressable
+      className="flex-1 bg-neutral-900 shadow-md rounded-lg"
       onPress={() => onEventPress(id)}
-      className="bg-neutral-900 rounded-lg shadow-md w-80 mx-auto mt-4"
+      style={styles}
     >
-      <View className="min-h-[180px] rounded-t-lg overflow-hidden">
+      <View className="min-h-[130px] overflow-hidden">
         {openGraphImage ? (
           <Image
             source={{ uri: openGraphImage }}
@@ -60,12 +55,12 @@ const EventCard: React.FC<{
           />
         ) : (
           <View className="flex-1 items-center justify-center">
-            <ImageOff color={'gray'} size={50} />
+            <ImageOff color="gray" size={50} />
           </View>
         )}
       </View>
 
-      <View className="p-4">
+      <View className="p-4 flex-1">
         <Text className="text-white font-bold text-lg">{title}</Text>
 
         <View className="mt-4">
@@ -80,30 +75,33 @@ const EventCard: React.FC<{
         </View>
       </View>
 
-      <View className="flex-row items-center justify-between px-4 py-2 bg-neutral-800 rounded-b-lg">
-        <View className="flex-row items-center">
-          {organization?.logo ? (
-            <Image
-              source={{ uri: organization.logo }}
-              className="h-5 w-5 rounded-full"
-              contentFit="fill"
-            />
-          ) : (
-            <Building2 size={16} color="white" />
-          )}
-          <Text className="text-gray-300 text-sm ml-2">
-            {organization?.name || 'Unknown'}
-          </Text>
-        </View>
+      {/* Footer with border and bottom border radius */}
+      <View className="p-1 bg-neutral-800">
+        <View className="flex-row items-center justify-between">
+          <View className="flex-row items-center">
+            {organization?.logo ? (
+              <Image
+                source={{ uri: organization.logo }}
+                className="h-5 w-5 rounded-full"
+                contentFit="fill"
+              />
+            ) : (
+              <Building2 size={16} color="white" />
+            )}
+            <Text className="text-gray-300 text-sm ml-2">
+              {organization?.name || 'Unknown'}
+            </Text>
+          </View>
 
-        <View className="flex-row items-center">
-          <Users size={16} color="white" />
-          <Text className="text-gray-300 text-sm ml-2">
-            {registrations} {t('general.going')}
-          </Text>
+          <View className="flex-row items-center">
+            <Users size={16} color="white" />
+            <Text className="text-gray-300 text-sm ml-2">
+              {registrations} {t('general.going')}
+            </Text>
+          </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 

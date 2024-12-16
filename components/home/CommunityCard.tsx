@@ -1,69 +1,51 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ViewStyle,
-  StyleSheet
-} from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { CommunitiesType } from '@/types/communitiesType'
 import { ImageOff } from 'lucide-react-native'
 
 interface CommunityCardProps {
   navigateToCommunity: (id: string) => void
   community: CommunitiesType
-  style?: ViewStyle
 }
 
 const CommunityCard: React.FC<CommunityCardProps> = ({
   community,
-  navigateToCommunity,
-  style
+  navigateToCommunity
 }) => {
   const { id, name, description, logo } = community
 
   return (
     <TouchableOpacity
-      onPress={() => navigateToCommunity?.(id)}
+      onPress={() => navigateToCommunity(id)}
       activeOpacity={0.9}
-      style={[styles.container, style]}
-      className="bg-neutral-900 rounded-lg shadow-md min-h-fit mx-auto mt-4 border border-neutral-800"
+      className="bg-neutral-900 rounded-lg shadow-md border border-neutral-800 overflow-hidden flex-1 mx-2 mb-4 min-h-[250px]"
     >
-      <View className="min-h-[150px] w-auto">
+      {/* Logo Section */}
+      <View className="h-[150px] w-full relative">
         {logo ? (
           <Image
             source={{ uri: logo }}
-            style={styles.image}
-            className="absolute inset-0 object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
+            resizeMode="cover"
           />
         ) : (
           <View className="flex-1 items-center justify-center">
-            <ImageOff color={'gray'} size={50} />
+            <ImageOff color="gray" size={50} />
           </View>
         )}
       </View>
 
-      <View className="p-2 relative flex flex-col justify-between">
-        <Text numberOfLines={1} className="text-gray-200 mb-1">
+      {/* Text Content */}
+      <View className="p-2 flex-1 flex flex-col justify-between">
+        <Text numberOfLines={1} className="text-gray-200 font-semibold mb-1">
           {name}
         </Text>
-        <Text className="text-gray-400 text-sm" numberOfLines={3}>
+        <Text numberOfLines={3} className="text-gray-400 text-sm">
           {description}
         </Text>
       </View>
     </TouchableOpacity>
   )
 }
+
 export default CommunityCard
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    minHeight: 250,
-    width: '45%'
-  },
-  image: {
-    width: '100%',
-    height: '100%'
-  }
-})

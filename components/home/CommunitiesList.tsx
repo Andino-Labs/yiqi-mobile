@@ -1,21 +1,17 @@
 import React, { useCallback } from 'react'
-import { FlatList } from 'react-native'
 import CommunityCard from './CommunityCard'
 import { CommunitiesType } from '@/types/communitiesType'
 import { Link, useRouter } from 'expo-router'
 import { useTranslation } from 'react-i18next'
 import { ThemedText } from '../ThemedText'
 import { ThemedView } from '../ThemedView'
+import { FlashList, ListRenderItem } from '@shopify/flash-list'
 
 interface CommunitiesListProps {
   communities?: CommunitiesType[]
 }
 
 export default function CommunitiesList({ communities }: CommunitiesListProps) {
-  const keyExtractor = useCallback(
-    (item: CommunitiesType, index: number) => item.id + index,
-    []
-  )
   const router = useRouter()
   const { t } = useTranslation()
 
@@ -24,6 +20,19 @@ export default function CommunitiesList({ communities }: CommunitiesListProps) {
       pathname: '/communityDetails/[communityId]',
       params: { communityId }
     })
+  const keyExtractor = useCallback(
+    (item: CommunitiesType, index: number) => item.id + index.toString(),
+    []
+  )
+  const renderItem: ListRenderItem<CommunitiesType> = useCallback(
+    ({ item }) => (
+      <CommunityCard
+        navigateToCommunity={navigateToCommunity}
+        community={item}
+      />
+    ),
+    []
+  )
   return (
     <>
       <ThemedView className="flex-row justify-between px-4 mt-4">
@@ -36,21 +45,13 @@ export default function CommunitiesList({ communities }: CommunitiesListProps) {
           </ThemedText>
         </Link>
       </ThemedView>
-      <FlatList
-        data={communities || []}
-        numColumns={2} // Two-column layout
+      <FlashList
+        data={communities}
+        renderItem={renderItem}
+        estimatedItemSize={250}
+        numColumns={2}
+        contentContainerStyle={{ paddingHorizontal: 8, paddingTop: 8 }}
         keyExtractor={keyExtractor}
-        nestedScrollEnabled
-        className="pl-2 mt-2"
-        columnWrapperStyle={{
-          justifyContent: 'space-between'
-        }}
-        renderItem={({ item }) => (
-          <CommunityCard
-            navigateToCommunity={navigateToCommunity}
-            community={item}
-          />
-        )}
       />
     </>
   )

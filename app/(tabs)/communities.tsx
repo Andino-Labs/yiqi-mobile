@@ -14,6 +14,7 @@ import CommunityCard from '@/components/home/CommunityCard'
 import { CommunitiesType } from '@/types/communitiesType'
 import { Colors } from '@/constants/Colors'
 import { useTranslation } from 'react-i18next'
+import { FlashList } from '@shopify/flash-list'
 
 const FETCH_LIMIT = 8
 
@@ -88,7 +89,7 @@ export default function Communities() {
         <View />
       </View>
       <View className="flex-1 m-2">
-        <FlatList
+        <FlashList
           data={communities}
           renderItem={({ item }) => (
             <CommunityCard
@@ -98,14 +99,10 @@ export default function Communities() {
           )}
           onEndReached={loadMoreData}
           onEndReachedThreshold={0.8}
+          estimatedItemSize={250}
           ListFooterComponent={renderFooter}
-          numColumns={2} // Two-column layout
+          numColumns={2}
           keyExtractor={(item, index) => item.id + index.toString()}
-          columnWrapperStyle={{
-            justifyContent: 'space-between'
-          }}
-          initialNumToRender={8}
-          maxToRenderPerBatch={8}
         />
       </View>
     </SafeAreaView>
