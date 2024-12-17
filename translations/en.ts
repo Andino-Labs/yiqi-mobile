@@ -14,7 +14,8 @@ export default {
     going: 'Going',
     reset: 'Reset',
     apply: 'Apply',
-    showMore: 'Show all'
+    showMore: 'Show all',
+    login: 'Log in'
   },
   loginScreen: {
     welcome: 'Welcome to Yiqi',
@@ -104,5 +105,53 @@ export default {
     seeAllEvents: 'See all events',
     noEventsFound: 'No events found',
     noDescriptionAvailable: 'No description available'
+  },
+  tickets: {
+    ticketStatusApproved: 'Approved',
+    ticketStatusPending: 'Pending',
+    ticketStatusRejected: 'Rejected',
+    ticketTitlePage: 'Your Tickets',
+    ticketNo: 'You don´t have any tickets',
+    ticketEventImageAlt: 'Event Banner',
+    ticketNumber: 'Ticket #',
+    ticketLabelView: 'View Ticket',
+    ticketPaymentRequired: 'Payment is required',
+    ticketPayment: 'Pay now',
+    qrModalTicketLabel: 'Ticket #',
+    qrModalTicketName: 'Name',
+    qrModalTicketEmail: 'Email',
+    qrModalTicketStatus: 'Status',
+    qrModalTicketChecked: 'Checked',
+    qrModalTicketNotChecked: 'Not Checked',
+    loggedOutTitle: 'Looking for your tickets?',
+    LoggedOutDescription:
+      'Log into the same account or use the email that received your tickets to view your ticket list.'
+  },
+  community: {
+    communities: 'Communities',
+    noCommunitiesFound: 'No communities found at this time.',
+    about: 'About',
+    aboutShowLess: 'Show less',
+    aboutLoadMore: 'Load more',
+    eventsUpcomingEvents: 'Upcoming Events',
+    eventsPastEvents: 'Past Events',
+    members: 'Members',
+    membersOrganizedBy: 'Organized by',
+    memberOrganizers: 'Organizers'
+  },
+  profile: {
+    profileSettings: 'Profile Settings',
+    language: 'Language',
+    support: 'Support',
+    privacyPolicy: 'Privacy & Policy',
+    notLoggedIn: 'You are not logged in.',
+    appVersion: 'App Version',
+    signOut: 'Sign out',
+    languages: {
+      en: 'English',
+      es: 'Spanish',
+      fr: 'Frensh',
+      pt: 'Portugese'
+    }
   }
 }

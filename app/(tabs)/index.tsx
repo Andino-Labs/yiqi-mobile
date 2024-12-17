@@ -5,6 +5,7 @@ import HeroSection from '@/components/home/HeroSection'
 import trpc from '@/constants/trpc'
 import FeaturedEventList from '@/components/home/FeaturedEventList'
 import CommunitiesList from '@/components/home/CommunitiesList'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useRouter } from 'expo-router'
 
 export default function Home() {
@@ -12,8 +13,13 @@ export default function Home() {
     limit: 8
   })
   const { data: communities } = trpc.getCommunities.useQuery({ limit: 4 })
+  const { authenticated } = useCurrentUser()
   const router = useRouter()
+
   const onCallToActionPress = () => {
+    if (authenticated) {
+      return router.navigate('/events')
+    }
     router.navigate('/login')
   }
   const renderContent = () => (

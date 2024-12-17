@@ -14,7 +14,8 @@ export default {
     Going: 'Asistirán',
     reset: 'Restablecer',
     apply: 'Aplicar',
-    showMore: 'Mostrar más'
+    showMore: 'Mostrar más',
+    login: 'Iniciar sesión'
   },
   loginScreen: {
     welcome: 'Bienvenido a Yiqi',
@@ -107,5 +108,53 @@ export default {
     seeAllEvents: 'Ver todos los eventos',
     noEventsFound: 'No se encontraron eventos',
     noDescriptionAvailable: 'No hay descripción disponible'
+  },
+  tickets: {
+    ticketStatusApproved: 'Aprobado',
+    ticketStatusPending: 'Pendiente',
+    ticketStatusRejected: 'Rechazado',
+    ticketTitlePage: 'Tus entradas',
+    ticketNo: 'No tienes ningun ticket',
+    ticketEventImageAlt: 'Banner del evento',
+    ticketNumber: 'Entrada #',
+    ticketLabelView: 'Ver entrada',
+    ticketPaymentRequired: 'Se requiere pago',
+    ticketPayment: 'Pagar ahora',
+    qrModalTicketLabel: 'Entrada #',
+    qrModalTicketName: 'Nombre',
+    qrModalTicketEmail: 'Correo electrónico',
+    qrModalTicketStatus: 'Estado',
+    qrModalTicketChecked: 'Verificado',
+    qrModalTicketNotChecked: 'No verificado',
+    loggedOutTitle: '¿Buscas tus entradas?',
+    loggedOutDescription:
+      'Inicia sesión en la misma cuenta o utiliza el correo electrónico que recibió tus entradas para ver la lista de entradas.'
+  },
+  community: {
+    communities: 'Comunidades',
+    noCommunitiesFound: 'No se encontraron comunidades en este momento.',
+    about: 'Acerca de',
+    aboutShowLess: 'Mostrar menos',
+    aboutLoadMore: 'Cargar más',
+    eventsUpcomingEvents: 'Próximos eventos',
+    eventsPastEvents: 'Eventos pasados',
+    members: 'Miembros',
+    membersOrganizedBy: 'Organizado por',
+    memberOrganizers: 'Organizadores'
+  },
+  profile: {
+    profileSettings: 'Configuración de perfil',
+    language: 'Idioma',
+    support: 'Soporte',
+    privacyPolicy: 'Política de privacidad',
+    notLoggedIn: 'No has iniciado sesión.',
+    appVersion: 'Versión de la app',
+    signOut: 'Cerrar sesión',
+    languages: {
+      en: 'Inglés',
+      es: 'Español',
+      fr: 'Francés',
+      pt: 'Portugués'
+    }
   }
 }

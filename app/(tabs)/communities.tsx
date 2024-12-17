@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  Text,
-  View
-} from 'react-native'
+import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronLeft } from 'lucide-react-native'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'

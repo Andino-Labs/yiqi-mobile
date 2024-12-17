@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { SafeAreaView, TouchableOpacity, Linking } from 'react-native'
+import {
+  SafeAreaView,
+  TouchableOpacity,
+  Linking,
+  Pressable
+} from 'react-native'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
 import { useAuth } from '@/hooks/useAuth'
@@ -9,6 +14,8 @@ import GoogleSvg from '@/assets/svgs/GoogleSvg'
 import LinkedInModal from '@/components/LinkedInModal'
 import { useTranslation } from 'react-i18next'
 import showToast from '@/helpers/showToast'
+import { ChevronLeft } from 'lucide-react-native'
+import { useRouter } from 'expo-router'
 
 export default function Login() {
   const { onGoogleLogin, onLinkedInLogin } = useAuth()
@@ -51,20 +58,23 @@ export default function Login() {
     </TouchableOpacity>
   )
   const { t } = useTranslation()
-
+  const router = useRouter()
   return (
     <SafeAreaView className="bg-black flex-1 justify-center items-center px-5">
       <ThemedView
-        className="bg-gray-900 border-r-4"
+        className="bg-neutral-900 border-r-4"
         style={{ borderRadius: 10, padding: 10 }}
       >
-        <ThemedView className="bg-gray-900 items-center mb-8">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeft color="white" size={30} />
+        </Pressable>
+        <ThemedView className="bg-neutral-900 items-center mb-8">
           <LogoSvg height={100} width={100} />
           <ThemedText className="text-white text-xl font-semibold">
             {t('loginScreen.welcome')}
           </ThemedText>
           <ThemedText className="text-gray-400 text-sm">
-            Please sign in or sign up below
+            {t('loginScreen.signInOrSignUp')}
           </ThemedText>
         </ThemedView>
 

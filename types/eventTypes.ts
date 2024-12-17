@@ -18,12 +18,21 @@ export type TicketType = {
   price: number
   limit: number
   ticketsPerPurchase: number
+  status?: 'APPROVED' | 'PENDING' | 'REJECTED'
 }
 
 export type OrganizationType = {
+  id?: string
   logo: string | null
   name: string
+  colour?: string | null
   stripeAccountId?: string | null
+  linkedin?: string | null | undefined
+  instagram?: string | null | undefined
+  website?: string | null | undefined
+  userId?: string | null | undefined
+  facebook?: string | null | undefined
+  tiktok?: string | null | undefined
 }
 
 export type FeaturedItemType = {

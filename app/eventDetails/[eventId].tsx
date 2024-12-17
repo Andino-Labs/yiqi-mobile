@@ -3,7 +3,8 @@ import {
   Text,
   ScrollView,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Pressable
 } from 'react-native'
 import { ThemedText } from '@/components/ThemedText'
 import trpc from '@/constants/trpc'
@@ -12,39 +13,34 @@ import { Image } from 'expo-image'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import Registration from '@/components/Event/Registration'
 import EventDescription from '@/components/Event/EventDetails/EventDescription'
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { Stack, router, useLocalSearchParams } from 'expo-router'
 import LocationMap from '@/components/LocationMap'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-import { UserType } from '@/types/UserType'
-import * as SecureStore from 'expo-secure-store'
-import { secureStorageKeys } from '@/constants/SecureStore'
-import { errorHandler } from '@/helpers/errorHandler'
-import { ArrowLeft } from 'lucide-react-native'
+
+import { ArrowLeft, ChevronLeft } from 'lucide-react-native'
 import { Colors } from '@/constants/Colors'
 import { PublicEventType } from '@/types/eventTypes'
+import { useAuthContext } from '@/context/AuthContext'
 import * as Linking from 'expo-linking'
+import { errorHandler } from '@/helpers/errorHandler'
 
 export default function EventDetails() {
   const { eventId } = useLocalSearchParams<{ eventId: string }>()
-  const [user, setUser] = useState<UserType | undefined>()
   const { data, error, isLoading } = trpc.getEvent.useQuery({
     eventId,
     includeTickets: true
   })
   const { t } = useTranslation()
-  useEffect(() => {
-    const getUser = async () =>
-      SecureStore.getItemAsync(secureStorageKeys.USER_INFO)
-        .then(
-          data => data && typeof data == 'string' && setUser(JSON.parse(data))
-        )
-        .catch(errorHandler)
+  const {
+    session: { user }
+  } = useAuthContext()
 
-    getUser()
-  }, [])
-  const openMaps = () =>
-    Linking.openURL(`http://maps.google.com/?q=${data.location}`)
+  const openMaps = () => {
+    if (data?.location)
+      return Linking.openURL(
+        `http://maps.google.com/?q=${data.location}`
+      ).catch(errorHandler)
+  }
 
   if (isLoading) {
     return (
@@ -71,7 +67,11 @@ export default function EventDetails() {
       <Stack.Screen
         options={{
           title: data?.title || '',
-          headerLeft: () => <ArrowLeft />
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <ChevronLeft color="white" size={24} />
+            </Pressable>
+          )
         }}
       />
       <SafeAreaView className="flex-1 bg-black px-5 py-2">
@@ -144,9 +144,7 @@ export default function EventDetails() {
             {data.location}
           </ThemedText>
         </TouchableOpacity>
-        {data.latLon?.lat !== undefined && data.latLon?.lng !== undefined && (
-          <LocationMap coordinates={data.latLon} />
-        )}
+        <LocationMap coordinates={data.latLon} />
       </SafeAreaView>
     </ScrollView>
   )

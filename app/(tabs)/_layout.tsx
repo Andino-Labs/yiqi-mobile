@@ -2,7 +2,7 @@
 import { Colors } from '@/constants/Colors'
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { Calendar, Users, User2, HomeIcon } from 'lucide-react-native'
+import { Calendar, Users, User2, HomeIcon, Ticket } from 'lucide-react-native'
 
 export default function TabLayout() {
   return (
@@ -38,6 +38,14 @@ export default function TabLayout() {
           title: 'Communities',
           headerShown: false,
           tabBarIcon: ({ color }) => <Users size={20} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="tickets"
+        options={{
+          title: 'Tickets',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Ticket size={20} color={color} />
         }}
       />
       <Tabs.Screen

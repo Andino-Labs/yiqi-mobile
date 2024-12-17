@@ -1,29 +1,44 @@
 import { Colors } from '@/constants/Colors'
 import { ChevronDown, ChevronUp } from 'lucide-react-native'
 import { useMemo } from 'react'
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle
+} from 'react-native'
 import SelectDropdown from 'react-native-select-dropdown'
 
-interface IProps {
-  error?: string
-  placeholder: string
-  items: { label: string; value: string }[]
-  value?: string
-  onSelect: (selectedItem: { label: string; value: string }) => void
-  onBlur?: () => void
+// Generic type for the Select component
+export type SelectorOption<T> = {
+  label: string
+  value: T
 }
 
-export const Select = ({
+export type SelectProps<T> = {
+  error?: string
+  placeholder: string
+  items: SelectorOption<T>[]
+  value?: string
+  onSelect: (selectedItem: SelectorOption<T>) => void
+  onBlur?: () => void
+  dropdownButtonStyle?: StyleProp<ViewStyle>
+}
+
+export const Select = <T extends unknown>({
   error,
   placeholder,
   items,
   value,
   onSelect,
-  onBlur
-}: IProps) => {
+  onBlur,
+  dropdownButtonStyle
+}: SelectProps<T>) => {
   const selectedItem = useMemo(
     () => items.find(item => item.value === value),
-    [value]
+    [value, items]
   )
 
   return (
@@ -31,13 +46,14 @@ export const Select = ({
       <>
         <SelectDropdown
           data={items}
+          statusBarTranslucent
           onSelect={selectedItem => onSelect(selectedItem)}
           defaultValue={selectedItem}
           renderButton={(selectedItem, isOpened) => {
             const ChevronIcon = isOpened ? ChevronUp : ChevronDown
 
             return (
-              <View style={styles.dropdownButtonStyle}>
+              <View style={[styles.dropdownButtonStyle, dropdownButtonStyle]}>
                 <Text style={styles.dropdownButtonTextStyle}>
                   {selectedItem?.label ?? placeholder}
                 </Text>
@@ -72,7 +88,6 @@ export const Select = ({
 const styles = StyleSheet.create({
   dropdownButtonStyle: {
     height: 45,
-    // backgroundColor: Colors.colors.backgroundSecondary,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',

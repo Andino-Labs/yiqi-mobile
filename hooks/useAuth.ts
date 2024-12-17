@@ -5,12 +5,14 @@ import {
   statusCodes
 } from '@react-native-google-signin/google-signin'
 import trpc from '@/constants/trpc'
-import { secureStorageKeys } from '@/constants/SecureStore'
-import * as SecureStore from 'expo-secure-store'
 import showToast from '@/helpers/showToast'
 import { errorHandler } from '@/helpers/errorHandler'
+import { useAuthContext } from '@/context/AuthContext'
 
 export function useAuth() {
+  const router = useRouter()
+  const { signIn } = useAuthContext()
+
   const configGoogleSignIn = () => {
     GoogleSignin.configure({
       offlineAccess: false,
@@ -24,7 +26,6 @@ export function useAuth() {
   const loginGoogle = trpc.loginGoogle.useMutation()
   const loginLinkedIn = trpc.loginLinkedin.useMutation()
 
-  const router = useRouter()
   // Handle Google Login
   const onGoogleLogin = async () => {
     try {
@@ -35,12 +36,8 @@ export function useAuth() {
         const idToken = userInfo.data.idToken
 
         const { sessionId, user } = await loginGoogle.mutateAsync({ idToken })
-        if (typeof sessionId === 'string' && sessionId !== '') {
-          await SecureStore.setItemAsync(secureStorageKeys.TOKEN, sessionId)
-          await SecureStore.setItemAsync(
-            secureStorageKeys.USER_INFO,
-            JSON.stringify(user)
-          )
+        if (user && sessionId !== '') {
+          await signIn(user, sessionId)
         }
         showToast('Login Success')
         router.back()
@@ -56,10 +53,8 @@ export function useAuth() {
           showToast('Google Play Services are not available.', {
             type: 'error'
           })
-          break
-        default:
-          errorHandler(error)
       }
+      console.log(error)
     }
   }
 
@@ -72,14 +67,7 @@ export function useAuth() {
           typeof response.sessionId === 'string' &&
           response.sessionId !== ''
         ) {
-          await SecureStore.setItemAsync(
-            secureStorageKeys.TOKEN,
-            response.sessionId
-          )
-          await SecureStore.setItemAsync(
-            secureStorageKeys.USER_INFO,
-            JSON.stringify(response.user)
-          )
+          await signIn(response.user, response.sessionId)
         }
         showToast('Login Success')
         router.back()

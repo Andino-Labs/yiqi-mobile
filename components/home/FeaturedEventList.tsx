@@ -7,6 +7,9 @@ import { ThemedText } from '../ThemedText'
 import { useTranslation } from 'react-i18next'
 import { FlashList, ListRenderItem } from '@shopify/flash-list'
 import { ThemedView } from '../ThemedView'
+import trpc from '@/constants/trpc'
+import { getQueryKey } from '@trpc/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface FeaturedEventListProps {
   events?: PublicEventType[]
@@ -15,12 +18,34 @@ export default function FeaturedEventList({ events }: FeaturedEventListProps) {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const onEventPress = (eventId: string) =>
-    router.push({
-      pathname: '/eventDetails/[eventId]',
-      params: { eventId }
-    })
+  // Prefetch event details
+  const queryClient = useQueryClient()
+  const fetchEvent = trpc.getEvent.useQuery(
+    { includeTickets: true, eventId: '' },
+    { enabled: false }
+  )
 
+  const onEventPress = useCallback(
+    async (eventId: string) => {
+      try {
+        const queryKey = getQueryKey(trpc.getEvent, {
+          eventId,
+          includeTickets: true
+        })
+
+        await queryClient.prefetchQuery(queryKey, () => fetchEvent.refetch)
+
+        // Navigate to event details
+        router.push({
+          pathname: '/eventDetails/[eventId]',
+          params: { eventId }
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [queryClient, router]
+  )
   const keyExtractor = useCallback(
     (item: PublicEventType, index: number) => item.id + index.toString(),
     []

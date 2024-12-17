@@ -125,33 +125,31 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
         </TouchableOpacity>
       </View>
 
-      {user && (
-        <Modal isOpen={isModalVisible} onDismiss={() => setModalVisible(false)}>
-          <View className="bg-gray-800 p-4 rounded-lg">
-            <View className="flex-row justify-between items-start">
-              <Pressable
-                onPress={() => setModalVisible(false)}
-                className="ml-auto"
-              >
-                <Ionicons name="close" color={'white'} size={20} />
-              </Pressable>
-            </View>
-
-            <RegistrationSummary
-              calculateTotal={calculateTotal}
-              tickets={event?.tickets}
-              ticketSelections={ticketSelections}
-            />
-            <RegistrationForm
-              isFreeEvent={isFreeEvent}
-              onSubmit={onSubmit}
-              user={user}
-              registrationId={currentRegistrationId}
-              handlePaymentComplete={handlePaymentComplete}
-            />
+      <Modal isOpen={isModalVisible} onDismiss={() => setModalVisible(false)}>
+        <View className="bg-gray-800 p-4 rounded-lg">
+          <View className="flex-row justify-between items-start">
+            <Pressable
+              onPress={() => setModalVisible(false)}
+              className="ml-auto"
+            >
+              <Ionicons name="close" color={'white'} size={20} />
+            </Pressable>
           </View>
-        </Modal>
-      )}
+
+          <RegistrationSummary
+            calculateTotal={calculateTotal}
+            tickets={event?.tickets}
+            ticketSelections={ticketSelections}
+          />
+          <RegistrationForm
+            isFreeEvent={isFreeEvent}
+            onSubmit={onSubmit}
+            user={user}
+            registrationId={currentRegistrationId}
+            handlePaymentComplete={handlePaymentComplete}
+          />
+        </View>
+      </Modal>
     </>
   )
 }
