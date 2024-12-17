@@ -8,4 +8,4 @@ export const API = __DEV__
         ? process.env.EXPO_PUBLIC_IOS_API_URL
         : process.env.EXPO_PUBLIC_ANDROID_API_URL
     }:3000`
-  : process.env.DEPLOYMENT_API
+  : process.env.EXPO_PUBLIC_DEPLOYMENT_API

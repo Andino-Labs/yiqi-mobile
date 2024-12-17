@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
+import {
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native'
 import { ThemedText } from '@/components/ThemedText'
 import trpc from '@/constants/trpc'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -17,6 +23,7 @@ import { errorHandler } from '@/helpers/errorHandler'
 import { ArrowLeft } from 'lucide-react-native'
 import { Colors } from '@/constants/Colors'
 import { PublicEventType } from '@/types/eventTypes'
+import * as Linking from 'expo-linking'
 
 export default function EventDetails() {
   const { eventId } = useLocalSearchParams<{ eventId: string }>()
@@ -36,6 +43,9 @@ export default function EventDetails() {
 
     getUser()
   }, [])
+  const openMaps = () =>
+    Linking.openURL(`http://maps.google.com/?q=${data.location}`)
+
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-black justify-center items-center">
@@ -129,10 +139,14 @@ export default function EventDetails() {
         <ThemedText className="text-white text-2xl font-bold mb-2">
           {t('Event.location')}
         </ThemedText>
-        <ThemedText className="text-white text-sm font-bold mb-2">
-          {data.location}
-        </ThemedText>
-        {data.location && <LocationMap locationString={data.location} />}
+        <TouchableOpacity onPress={openMaps}>
+          <ThemedText className="text-white text-sm font-bold mb-2">
+            {data.location}
+          </ThemedText>
+        </TouchableOpacity>
+        {data.latLon?.lat !== undefined && data.latLon?.lng !== undefined && (
+          <LocationMap coordinates={data.latLon} />
+        )}
       </SafeAreaView>
     </ScrollView>
   )

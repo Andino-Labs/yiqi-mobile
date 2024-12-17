@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import MapView, { Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps'
-import Geocoder from 'react-native-geocoding'
-import { errorHandler } from '@/helpers/errorHandler'
-
-// Initialize the Geocoding API with your API key
-Geocoder.init(process.env.EXPO_PUBLIC_MAPS_API || '')
 
 interface LocationMapProps {
-  locationString: string
+  coordinates: { lat: number; lon: number }
 }
 
 const DEFAULT_REGION: Region = {
@@ -18,55 +13,35 @@ const DEFAULT_REGION: Region = {
   longitudeDelta: 0.05
 }
 
-const LocationMap: React.FC<LocationMapProps> = ({ locationString }) => {
-  const [region, setRegion] = useState<Region>(DEFAULT_REGION)
+const LocationMap: React.FC<LocationMapProps> = ({
+  coordinates = { lat: DEFAULT_REGION.latitude, lon: DEFAULT_REGION.longitude }
+}) => {
   const [mapInitialized, setMapInitialized] = useState(false)
 
-  // Geocode the location string and update region
-  useEffect(() => {
-    const geocodeLocation = async () => {
-      try {
-        const response = await Geocoder.from(locationString)
-        const { lat, lng } = response.results[0].geometry.location
-        setRegion({
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05
-        })
-      } catch (error) {
-        errorHandler(error)
-      }
-    }
-
-    if (locationString) {
-      geocodeLocation()
-    }
-  }, [locationString])
-
-  // Handle map initialization
-  const onMapReady = () => {
-    if (mapInitialized) {
-      return
-    }
-
-    // You can do any additional map setup here
-    setMapInitialized(true)
+  // Determine the initial region based on props or fallback to default
+  const initialRegion: Region = {
+    latitude: coordinates.lat,
+    longitude: coordinates.lon,
+    latitudeDelta: DEFAULT_REGION.latitudeDelta,
+    longitudeDelta: DEFAULT_REGION.longitudeDelta
   }
+
+  // Handle map readiness
+  const onMapReady = () => setMapInitialized(true)
 
   return (
     <View style={styles.container}>
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        region={region}
-        onMapReady={onMapReady} // Trigger when the map is ready
+        style={StyleSheet.absoluteFillObject}
+        initialRegion={initialRegion}
+        onMapReady={onMapReady}
       >
         {mapInitialized && (
           <Marker
             coordinate={{
-              latitude: region.latitude,
-              longitude: region.longitude
+              latitude: coordinates.lat,
+              longitude: coordinates.lon
             }}
           />
         )}
@@ -78,12 +53,9 @@ const LocationMap: React.FC<LocationMapProps> = ({ locationString }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 300, // you can customize this
-    width: '100%', // you can customize this
+    height: 300, // Adjust as needed
+    width: '100%',
     alignItems: 'center'
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject
   }
 })
 
