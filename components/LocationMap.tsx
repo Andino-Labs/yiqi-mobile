@@ -3,7 +3,10 @@ import { View, StyleSheet } from 'react-native'
 import MapView, { Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps'
 
 interface LocationMapProps {
-  coordinates: { lat: number; lon: number }
+  coordinates: {
+    lat: number | null
+    lon: number | null
+  }
 }
 
 const DEFAULT_REGION: Region = {
@@ -17,7 +20,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
   coordinates = { lat: DEFAULT_REGION.latitude, lon: DEFAULT_REGION.longitude }
 }) => {
   const [mapInitialized, setMapInitialized] = useState(false)
-
+  if (coordinates.lat === null || coordinates.lon === null) return null
   // Determine the initial region based on props or fallback to default
   const initialRegion: Region = {
     latitude: coordinates.lat,

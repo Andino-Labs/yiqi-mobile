@@ -43,8 +43,12 @@ export default function EventDetails() {
 
     getUser()
   }, [])
-  const openMaps = () =>
-    Linking.openURL(`http://maps.google.com/?q=${data.location}`)
+  const openMaps = () => {
+    if (data?.location)
+      return Linking.openURL(
+        `http://maps.google.com/?q=${data.location}`
+      ).catch(errorHandler)
+  }
 
   if (isLoading) {
     return (
@@ -144,7 +148,7 @@ export default function EventDetails() {
             {data.location}
           </ThemedText>
         </TouchableOpacity>
-        {data.latLon?.lat !== undefined && data.latLon?.lng !== undefined && (
+        {data.latLon?.lat && data.latLon?.lon && (
           <LocationMap coordinates={data.latLon} />
         )}
       </SafeAreaView>
