@@ -16,7 +16,7 @@ const LoggedOutTicketList: React.FC = () => {
         <ThemedText className="text-neutral-400 text-center mb-6">
           {t('tickets.LoggedOutDescription')}
         </ThemedText>
-        <Link href="/login" asChild className={'mt-6 w-full sm:w-auto'}>
+        <Link href="/login" className={'mt-6 self-center'}>
           <LinearGradient
             colors={['#04F1FF', '#6de4e8']}
             className={

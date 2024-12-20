@@ -140,7 +140,9 @@ export default {
     eventsPastEvents: 'Eventos pasados',
     members: 'Miembros',
     membersOrganizedBy: 'Organizado por',
-    memberOrganizers: 'Organizadores'
+    memberOrganizers: 'Organizadores',
+    noEventAvailable: 'No hay eventos disponibles',
+    noEventAvailableDescription: '¡Vuelve más tarde para más actualizaciones!'
   },
   profile: {
     profileSettings: 'Configuración de perfil',

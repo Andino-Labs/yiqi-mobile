@@ -19,7 +19,6 @@ import { Colors } from '@/constants/Colors'
 import { ChevronRight } from 'lucide-react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useTranslation } from 'react-i18next'
-import showToast from '@/helpers/showToast'
 
 const APP_VERSION = process.env.EXPO_PUBLIC_APP_VERSION || '1.0.1'
 const iconProps = { size: 24, color: Colors.dark.tint }

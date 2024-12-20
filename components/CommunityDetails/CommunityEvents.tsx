@@ -8,6 +8,7 @@ import EventListCard from '../Event/EventListCard'
 import type { ListRenderItem } from '@react-native/virtualized-lists'
 import CommunityEventCard from './CommunityEventCard'
 import { useRouter } from 'expo-router'
+import EmptyEventComponent from './EmptyEventComponent'
 async function getValidEvents(events: PublicEventType[]) {
   const now = new Date()
   return events.filter(event => new Date(event.startDate) >= now)
@@ -57,6 +58,7 @@ export default function CommunityEvents({
             {t('community.eventsUpcomingEvents')}
           </ThemedText>
         )}
+        ListEmptyComponent={<EmptyEventComponent />}
         renderItem={renderItem}
       />
       <Tabs.FlatList
@@ -67,6 +69,7 @@ export default function CommunityEvents({
             {t('community.eventsPastEvents')}
           </ThemedText>
         )}
+        ListEmptyComponent={<EmptyEventComponent />}
         renderItem={renderItem}
       />
     </View>

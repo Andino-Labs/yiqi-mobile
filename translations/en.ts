@@ -137,7 +137,9 @@ export default {
     eventsPastEvents: 'Past Events',
     members: 'Members',
     membersOrganizedBy: 'Organized by',
-    memberOrganizers: 'Organizers'
+    memberOrganizers: 'Organizers',
+    noEventAvailable: 'No Events Available',
+    noEventAvailableDescription: 'Check back later for updates!'
   },
   profile: {
     profileSettings: 'Profile Settings',

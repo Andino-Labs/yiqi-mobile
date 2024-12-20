@@ -2,7 +2,7 @@ export default {
   expo: {
     name: 'yiqi-mobile',
     slug: 'yiqi-mobile',
-    version: '1.0.0',
+    version: '1.0.2',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
     scheme: 'myapp',
@@ -13,6 +13,7 @@ export default {
       backgroundColor: '#ffffff'
     },
     ios: {
+      buildNumber: 1,
       supportsTablet: true,
       bundleIdentifier: 'com.andinolabs.yiqi',
       config: {
@@ -20,12 +21,13 @@ export default {
       }
     },
     android: {
+      package: 'com.andinolabs.yiqi',
+      versionCode: 4,
       softwareKeyboardLayoutMode: 'pan',
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff'
       },
-      package: 'com.andinolabs.yiqi',
       config: {
         googleMaps: {
           apiKey: process.env.ANDROID_MAPS_API

@@ -21,7 +21,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session>({
     authenticated: false
   })
+  const configGoogleSignIn = () => {
+    GoogleSignin.configure({
+      offlineAccess: false,
+      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID
+    })
+  }
 
+  useEffect(() => {
+    configGoogleSignIn()
+  }, [])
   useEffect(() => {
     // Check for token on component mount
     const fetchSession = async () => {
