@@ -18,14 +18,11 @@ export default function Communities() {
 
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-  const { data, refetch, isFetching } = trpc.getCommunities.useQuery(
-    { page, limit: FETCH_LIMIT },
-    { enabled: false }
-  )
+  const { data } = trpc.getCommunities.useQuery({
+    page,
+    limit: FETCH_LIMIT
+  })
 
-  useEffect(() => {
-    refetch()
-  }, [page])
   const [communities, setCommunities] = useState<CommunitiesType[]>([])
   useEffect(() => {
     if (page === 1) {
@@ -47,11 +44,8 @@ export default function Communities() {
     }
   }
 
-  useEffect(() => {
-    refetch()
-  }, [page])
   const renderFooter = () => {
-    if (isFetching) {
+    if (isLoading) {
       return (
         <ActivityIndicator
           className=" py-2"
@@ -69,6 +63,7 @@ export default function Communities() {
       pathname: '/communityDetails/[communityId]',
       params: { communityId }
     })
+
   return (
     <SafeAreaView className="flex-1 bg-black">
       <View className="flex-row items-center justify-between p-2">

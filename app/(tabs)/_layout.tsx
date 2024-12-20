@@ -3,8 +3,20 @@ import { Colors } from '@/constants/Colors'
 import { Tabs } from 'expo-router'
 import React from 'react'
 import { Calendar, Users, User2, HomeIcon, Ticket } from 'lucide-react-native'
+import trpc from '@/constants/trpc'
 
 export default function TabLayout() {
+  // Prefetch queries on startup to make app feel more snappy
+  const [getCommunities, getEvents] = trpc.useQueries(t => [
+    t.getCommunities({ limit: 8, page: 1 }),
+    t.getPublicEvents({ limit: 8, page: 1, title: '', startDate: '', type: '' })
+  ])
+  const isPrefetched = getCommunities.isFetched && getEvents.isFetched
+
+  if (!isPrefetched) {
+    return null
+  }
+
   return (
     <Tabs
       screenOptions={{

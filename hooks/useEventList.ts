@@ -22,7 +22,7 @@ export const useEventList = () => {
     trpc.getPublicEvents.useQuery({ ...searchFilters, page, limit: 8 })
   // Prefetch event details
   const queryClient = useQueryClient()
-  const fetchEvent = trpc.getEvent.useQuery(
+  const fetchEventDetails = trpc.getEvent.useQuery(
     { includeTickets: true, eventId: '' },
     { enabled: false }
   )
@@ -35,7 +35,10 @@ export const useEventList = () => {
           includeTickets: true
         })
 
-        await queryClient.prefetchQuery(queryKey, () => fetchEvent.refetch)
+        await queryClient.prefetchQuery(
+          queryKey,
+          () => fetchEventDetails.refetch
+        )
 
         // Navigate to event details
         router.push({
@@ -69,11 +72,6 @@ export const useEventList = () => {
     })
     applyFilters()
   }, [applyFilters])
-
-  // Refetch when filters or page change
-  useEffect(() => {
-    refetch()
-  }, [searchFilters, page, refetch])
 
   // Update events when data changes
   useEffect(() => {
