@@ -15,7 +15,9 @@ export default {
     reset: 'Redefinir',
     apply: 'Aplicar',
     showMore: 'Ver todos',
-    login: 'Entrar'
+    login: 'Entrar',
+    confirm: 'Excluir',
+    cancel: 'Cancelar'
   },
   loginScreen: {
     welcome: 'Bem-vindo ao Yiqi',
@@ -154,6 +156,78 @@ export default {
       es: 'Espanhol',
       fr: 'Francês',
       pt: 'Português'
+    }
+  },
+  profileSettings: {
+    name: 'Nome',
+    phoneNumber: 'Número de telefone',
+    company: 'Empresa',
+    position: 'Cargo',
+    bio: 'Biografia',
+    saveChanges: 'Salvar alterações',
+    saving: 'Salvando...',
+    profileUpdated: 'Perfil atualizado com sucesso',
+    error: 'Erro',
+    failedToUpdate: 'Falha ao atualizar o perfil. Por favor, tente novamente.',
+    enterYourName: 'Digite seu nome',
+    enterYourEmail: 'Digite seu email',
+    enterYourPhone: 'Digite seu número de telefone',
+    enterYourCompany: 'Digite sua empresa',
+    enterYourPosition: 'Digite seu cargo',
+    tellUsAboutYourself: 'Fale-nos sobre você',
+    setToPublic: 'Definir como público',
+    User: 'Usuário',
+    profileSettings: 'Configurações de perfil',
+    enterYourX: 'Digite sua URL X',
+    enterInstagramURL: 'Digite sua URL do Instagram',
+    enterWebsiteURL: 'Digite sua URL do site',
+    enterLinkedinURL: 'Digite sua URL do LinkedIn',
+    website: 'Site',
+    stopCommunications: 'Parar comunicações',
+    disableCommunications: 'Comunicações desativadas',
+    role: 'Função',
+    deleteModal: {
+      title: 'Excluir Conta',
+      description:
+        'Tem certeza de que deseja excluir sua conta? Esta ação não pode ser desfeita.'
+    }
+  },
+  settings: {
+    imagePicker: {
+      camera: 'Camera',
+      photo: 'Photo',
+      delete: 'Delete',
+      edit: 'Editar foto de perfil',
+      alert: {
+        photoPermissions: {
+          title: 'Permissão necessária',
+          body: 'Precisamos de acesso às suas fotos para alterar sua foto de perfil.',
+          buttons: {
+            cancel: 'Cancelar',
+            openSettings: 'Abrir configurações'
+          }
+        }
+      },
+      errors: {
+        openPhotosFailure: 'Falha ao abrir a biblioteca de fotos.',
+        openCameraFailure: 'Falha ao abrir a câmera.'
+      },
+      updateModal: {
+        title: 'Atualizando foto de perfil',
+        error: 'Não foi possível atualizar sua foto de perfil.',
+        buttons: {
+          retry: 'Tentar novamente',
+          discard: 'Descartar'
+        }
+      },
+      deleteModal: {
+        title: 'Excluindo foto de perfil',
+        error: 'Não foi possível excluir sua foto de perfil.',
+        buttons: {
+          retry: 'Tentar novamente',
+          discard: 'Descartar'
+        }
+      }
     }
   }
 }

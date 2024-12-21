@@ -15,7 +15,9 @@ export default {
     reset: 'Reset',
     apply: 'Apply',
     showMore: 'Show all',
-    login: 'Log in'
+    login: 'Log in',
+    delete: 'Delete',
+    cancel: 'Cancel'
   },
   loginScreen: {
     welcome: 'Welcome to Yiqi',
@@ -154,6 +156,78 @@ export default {
       es: 'Spanish',
       fr: 'Frensh',
       pt: 'Portugese'
+    }
+  },
+  profileSettings: {
+    name: 'Name',
+    phoneNumber: 'Phone Number',
+    company: 'Company',
+    position: 'Position',
+    bio: 'Bio',
+    saveChanges: 'Save Changes',
+    saving: 'Saving...',
+    profileUpdated: 'Profile updated successfully',
+    error: 'Error',
+    failedToUpdate: 'Failed to update profile. Please try again.',
+    enterYourName: 'Enter your name',
+    enterYourEmail: 'Enter your Email',
+    enterYourPhone: 'Enter your Phone Number',
+    enterYourCompany: 'Enter your Company',
+    enterYourPosition: 'Enter your Position',
+    tellUsAboutYourself: 'Tell us about yourself',
+    setToPublic: 'Set to Public',
+    User: 'User',
+    profileSettings: 'Profile Settings',
+    enterYourX: 'Enter your X URL',
+    enterInstagramURL: 'Enter your Instagram URL',
+    enterWebsiteURL: 'Enter your website URL',
+    enterLinkedinURL: 'Enter your LinkedIn URL',
+    website: 'Website',
+    stopCommunications: 'Stop Communications',
+    disableCommunications: 'Disabled Communications',
+    role: 'Role',
+    deleteModal: {
+      title: 'Delete Account',
+      description:
+        'Are you sure you want to delete your account? This action cannot be undone.'
+    }
+  },
+  settings: {
+    imagePicker: {
+      camera: 'Camera',
+      photo: 'Photo',
+      delete: 'Delete',
+      edit: 'Edit Profile Picture',
+      alert: {
+        photoPermissions: {
+          title: 'Permission Required',
+          body: 'We need access to your photos to change your profile picture.',
+          buttons: {
+            cancel: 'Cancel',
+            openSettings: 'Open Settings'
+          }
+        }
+      },
+      errors: {
+        openPhotosFailure: 'Failed to open the photo library.',
+        openCameraFailure: 'Failed to open the camera.'
+      },
+      updateModal: {
+        title: 'Updating Profile Picture',
+        error: 'Failed to update your profile picture.',
+        buttons: {
+          retry: 'Retry',
+          discard: 'Discard'
+        }
+      },
+      deleteModal: {
+        title: 'Deleting Profile Picture',
+        error: 'Failed to delete your profile picture.',
+        buttons: {
+          retry: 'Retry',
+          discard: 'Discard'
+        }
+      }
     }
   }
 }

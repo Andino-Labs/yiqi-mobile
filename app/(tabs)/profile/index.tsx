@@ -74,7 +74,7 @@ export default function Profile() {
             <Section
               icon={<Settings {...iconProps} />}
               text={t('profile.profileSettings')}
-              onPress={() => Linking.openURL('https://www.yiqi.lat')}
+              onPress={() => router.navigate('/(tabs)/profile/profileSettings')}
             />
             <Section
               icon={<LanguagesIcon {...iconProps} />}

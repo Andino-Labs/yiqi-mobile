@@ -15,7 +15,7 @@ const UserInfo: React.FC<{ user: UserType }> = ({ user }) => {
           contentFit="cover"
         />
       ) : (
-        <View className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center">
+        <View className="w-32 h-32 rounded-full bg-gray-700 flex items-center justify-center">
           <User size={48} color="white" />
         </View>
       )}

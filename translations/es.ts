@@ -15,7 +15,9 @@ export default {
     reset: 'Restablecer',
     apply: 'Aplicar',
     showMore: 'Mostrar más',
-    login: 'Iniciar sesión'
+    login: 'Iniciar sesión',
+    confirm: 'Eliminar',
+    cancel: 'Cancelar'
   },
   loginScreen: {
     welcome: 'Bienvenido a Yiqi',
@@ -157,6 +159,79 @@ export default {
       es: 'Español',
       fr: 'Francés',
       pt: 'Portugués'
+    }
+  },
+  profileSettings: {
+    name: 'Nombre',
+    phoneNumber: 'Número de teléfono',
+    company: 'Empresa',
+    position: 'Cargo',
+    bio: 'Biografía',
+    saveChanges: 'Guardar cambios',
+    saving: 'Guardando...',
+    profileUpdated: 'Perfil actualizado con éxito',
+    error: 'Error',
+    failedToUpdate:
+      'Error al actualizar el perfil. Por favor, intente nuevamente.',
+    enterYourName: 'Introduce tu nombre',
+    enterYourEmail: 'Introduce tu correo electrónico',
+    enterYourPhone: 'Introduce tu número de teléfono',
+    enterYourCompany: 'Introduce tu empresa',
+    enterYourPosition: 'Introduce tu cargo',
+    tellUsAboutYourself: 'Cuéntanos sobre ti',
+    setToPublic: 'Establecer como público',
+    User: 'Usuario',
+    profileSettings: 'Configuración del Perfil',
+    enterYourX: 'Introduce tu link de x',
+    enterInstagramURL: 'Introduce tu link de Instagram',
+    enterWebsiteURL: 'Introduce tu link de sitio web',
+    enterLinkedinURL: 'Introduce tu link de LinkedIn',
+    website: 'Sitio web',
+    stopCommunications: 'Detener Comunicaciones',
+    disableCommunications: 'Deshabilitar todas las comunicaciones',
+    role: 'Rol',
+    deleteModal: {
+      title: 'Eliminar cuenta',
+      description:
+        '¿Está seguro de que desea eliminar su cuenta? Esta acción no se puede deshacer.'
+    }
+  },
+  settings: {
+    camera: 'Camera',
+    photo: 'Photo',
+    delete: 'Delete',
+    imagePicker: {
+      edit: 'Editar foto de perfil',
+      alert: {
+        photoPermissions: {
+          title: 'Permiso requerido',
+          body: 'Necesitamos acceso a tus fotos para cambiar tu foto de perfil.',
+          buttons: {
+            cancel: 'Cancelar',
+            openSettings: 'Abrir configuración'
+          }
+        }
+      },
+      errors: {
+        openPhotosFailure: 'Error al abrir la biblioteca de fotos.',
+        openCameraFailure: 'Error al abrir la cámara.'
+      },
+      updateModal: {
+        title: 'Actualizando foto de perfil',
+        error: 'No se pudo actualizar tu foto de perfil.',
+        buttons: {
+          retry: 'Reintentar',
+          discard: 'Descartar'
+        }
+      },
+      deleteModal: {
+        title: 'Eliminando foto de perfil',
+        error: 'No se pudo eliminar tu foto de perfil.',
+        buttons: {
+          retry: 'Reintentar',
+          discard: 'Descartar'
+        }
+      }
     }
   }
 }
