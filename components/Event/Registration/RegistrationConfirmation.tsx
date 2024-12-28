@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { RegistrationType } from '@/types/RegistrationType'
 import StripeCheckout from '@/components/Checkout/StripeCheckout'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
 import { useTranslation } from 'react-i18next'
 import { router } from 'expo-router'
 
@@ -79,7 +79,9 @@ function RegistrationConfirmation({
                 className="bg-red-600 p-3 rounded-lg mt-2"
                 onPress={() => setIsPaymentDialogOpen(false)}
               >
-                <Text className="text-white text-center font-bold">Cancel</Text>
+                <Text className="text-white text-center font-bold">
+                  {t('general.cancel')}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

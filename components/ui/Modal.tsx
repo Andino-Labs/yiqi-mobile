@@ -14,7 +14,7 @@ type PROPS = ModalProps & {
   onPressOverlay?: () => void
 }
 
-export const Modal = ({
+const Modal = ({
   isOpen,
   withInput,
   children,
@@ -49,3 +49,5 @@ export const Modal = ({
     </RNModal>
   )
 }
+
+export default Modal

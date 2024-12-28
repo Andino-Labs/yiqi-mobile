@@ -1,7 +1,7 @@
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
 import React from 'react'
 import { Pressable, Text, View } from 'react-native'
-import AppBottomSheet from './AppBottomSheet'
+import AppBottomSheet from './ui/AppBottomSheet'
 
 type ConfirmationModalProps = {
   title: string

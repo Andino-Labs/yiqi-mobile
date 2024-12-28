@@ -2,9 +2,9 @@ import showToast from '@/helpers/showToast'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import trpc from '@/constants/trpc'
 import { PublicEventType } from '@/types/eventTypes'
-import { UserType } from '@/types/UserType'
 import { errorHandler } from '@/helpers/errorHandler'
 import { RegistrationType } from '@/types/RegistrationType'
+import { UserType } from '@/schemas/userSchema'
 
 export const useRegistration = (event: PublicEventType, user?: UserType) => {
   const [ticketSelections, setTicketSelections] = useState<
@@ -37,10 +37,10 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
       }
     }
     setIsLoadingRegistration(false)
-  }, [user, event.id])
+  }, [user?.email, checkExistingRegistration, event.id])
   useEffect(() => {
     checkRegistration()
-  }, [event.id, user?.email])
+  }, [checkRegistration, event.id, user?.email])
 
   const handleQuantityChange = (ticketId: string, change: number) => {
     setTicketSelections(prev => {

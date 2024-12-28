@@ -56,7 +56,7 @@ export default function Events() {
 
   const renderItem: ListRenderItem<PublicEventType> = useCallback(
     ({ item }) => <EventListCard onEventPress={onEventPress} event={item} />,
-    []
+    [onEventPress]
   )
 
   return (

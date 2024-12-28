@@ -54,7 +54,6 @@ export function useAuth() {
             type: 'error'
           })
       }
-      console.log(error)
     }
   }
 

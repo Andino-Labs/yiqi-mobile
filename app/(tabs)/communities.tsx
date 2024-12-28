@@ -24,6 +24,7 @@ export default function Communities() {
   })
 
   const [communities, setCommunities] = useState<CommunitiesType[]>([])
+
   useEffect(() => {
     if (page === 1) {
       // On first page, replace the communities list
@@ -35,7 +36,7 @@ export default function Communities() {
       setCommunities(prev => [...prev, ...data.communities])
     }
     setIsLoading(false)
-  }, [data])
+  }, [data, page])
 
   const loadMoreData = () => {
     if (!isLoading && data?.pagination.hasMore) {

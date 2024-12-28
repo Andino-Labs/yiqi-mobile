@@ -4,6 +4,7 @@ import trpc from '@/constants/trpc'
 import { SearchFilterType } from '@/app/(tabs)/events'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
+import { errorHandler } from '@/helpers/errorHandler'
 
 export const useEventList = () => {
   const router = useRouter()
@@ -46,10 +47,10 @@ export const useEventList = () => {
           params: { eventId }
         })
       } catch (error) {
-        console.log(error)
+        errorHandler(error)
       }
     },
-    [queryClient, router]
+    [fetchEventDetails.refetch, queryClient, router]
   )
 
   // Open and close modal handlers

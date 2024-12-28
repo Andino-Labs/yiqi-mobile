@@ -1,26 +1,28 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack } from 'expo-router'
-
 import { ScrollView } from 'react-native'
 import { profileWithPrivacySchema } from '@/schemas/userSchema'
-import UpdateProfileForm from '@/components/Profile/UpdateProfileForm'
 import trpc from '@/constants/trpc'
+import UpdateNetworkingForm from '@/components/Profile/UpdateNetworkingForm'
+import { t } from 'i18next'
 
 export default function ProfileSettings() {
-  const { data, refetch } = trpc.getUserProfile.useQuery()
+  const { data } = trpc.getUserProfile.useQuery()
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView className="flex-1">
         <Stack.Screen
-          options={{ headerShown: true, title: 'Profile Settings' }}
+          options={{
+            headerShown: true,
+            title: t('networkingSettings.networkingProfileTitle')
+          }}
         />
 
         {data && (
-          <UpdateProfileForm
-            user={profileWithPrivacySchema.parse(data)}
-            onSuccess={refetch}
+          <UpdateNetworkingForm
+            initialData={profileWithPrivacySchema.parse(data)}
           />
         )}
       </SafeAreaView>

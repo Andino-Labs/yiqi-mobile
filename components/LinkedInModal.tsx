@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import WebView from 'react-native-webview'
 import uuid from 'react-native-uuid'
 import queryString from 'query-string'
-import { ThemedView } from './ThemedView'
+import { ThemedView } from './ui/ThemedView'
 
 interface ILinkedInModalProps {
   isVisible: boolean

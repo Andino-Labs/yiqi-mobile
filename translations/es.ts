@@ -148,6 +148,7 @@ export default {
   },
   profile: {
     profileSettings: 'Configuración de perfil',
+    networking: 'Networking',
     language: 'Idioma',
     support: 'Soporte',
     privacyPolicy: 'Política de privacidad',
@@ -196,6 +197,60 @@ export default {
         '¿Está seguro de que desea eliminar su cuenta? Esta acción no se puede deshacer.'
     }
   },
+  networkingSettings: {
+    networkingProfileTitle: 'Perfil de Networking Mejorado',
+    networkingProfileDescription:
+      'Ayúdanos a crear conexiones significativas para ti compartiendo más sobre tu viaje profesional. Esta información se utilizará para emparejarte con oportunidades relevantes, eventos y otros profesionales que comparten tus intereses y objetivos.',
+    networkingBenefits:
+      'Los beneficios incluyen recomendaciones de eventos personalizados, oportunidades de networking seleccionadas y contenido personalizado basado en tu perfil profesional.',
+
+    // Form Labels
+    professionalMotivations: 'Motivaciones Profesionales',
+    professionalMotivationsLabel: '¿Qué te motiva para tener éxito?',
+    professionalMotivationsPlaceholder:
+      'Comparte lo que te apasiona—innovación, liderazgo, ayudar a otros, crecimiento personal...',
+
+    communicationStyle: 'Estilo de Comunicación',
+    communicationStyleLabel:
+      '¿Cómo describirías tu estilo de comunicación y interacción?',
+    communicationStylePlaceholder:
+      '¿Eres más de un oyente o orador? ¿Prefieres colaborar o trabajar de manera independiente?',
+
+    professionalValues: 'Valores Profesionales',
+    professionalValuesLabel: '¿Qué valores guían tu vida profesional?',
+    professionalValuesPlaceholder:
+      'Integridad, creatividad, trabajo en equipo, responsabilidad social...',
+
+    careerAspirations: 'Metas Profesionales',
+    careerAspirationsLabel:
+      '¿Cuáles son tus objetivos profesionales a largo plazo?',
+    careerAspirationsPlaceholder:
+      'Roles de liderazgo, especialización, emprendimiento...',
+
+    significantChallenge: 'Desafío Profesional',
+    significantChallengeLabel:
+      'Comparte un desafío profesional significativo que has superado',
+    significantChallengePlaceholder:
+      '¿Cuál fue el desafío y qué aprendiste de él?',
+
+    saveNetworkingProfile: 'Guardar Perfil de Networking',
+    networkingProfileSaved: 'Perfil de networking actualizado exitosamente',
+    networkingProfileError: 'Error al actualizar el perfil de networking',
+    // Resume Upload
+    resumeUploadLabel: 'Subir Su Hoja de Vida (CV)',
+    selectResume: 'Seleccionar Hoja de Vida (PDF, TXT)',
+    currentResume: 'Hoja de Vida Actual:',
+    viewResume: 'Ver',
+    invalidFileType: 'Tipo de Archivo Inválido',
+    onlyPDFAllowed: 'Solo se permiten archivos PDF',
+    fileTooLarge: 'Archivo Too Grande',
+    maxFileSize: 'El tamaño máximo del archivo es de 5MB',
+    uploadingResume: 'Subiendo hoja de vida...',
+    resumeUploadError: 'Error al subir la hoja de vida',
+    resumeProcessing: 'Procesando hoja de vida...',
+    onlyPDFAndTXTAllowed: 'Solo se permiten archivos PDF, TXT y DOCX',
+    selectResumeTypes: 'Seleccionar Hoja de Vida (PDF, TXT o DOCX)'
+  },
   settings: {
     camera: 'Camera',
     photo: 'Photo',
@@ -206,10 +261,8 @@ export default {
         photoPermissions: {
           title: 'Permiso requerido',
           body: 'Necesitamos acceso a tus fotos para cambiar tu foto de perfil.',
-          buttons: {
-            cancel: 'Cancelar',
-            openSettings: 'Abrir configuración'
-          }
+          cancel: 'Cancelar',
+          openSettings: 'Abrir configuración'
         }
       },
       errors: {

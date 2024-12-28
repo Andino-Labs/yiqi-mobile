@@ -1,10 +1,9 @@
 import { View } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { PublicEventType } from '@/types/eventTypes'
 import { Tabs } from 'react-native-collapsible-tab-view'
 import { t } from 'i18next'
 import { useCallback, useEffect, useState } from 'react'
-import EventListCard from '../Event/EventListCard'
 import type { ListRenderItem } from '@react-native/virtualized-lists'
 import CommunityEventCard from './CommunityEventCard'
 import { useRouter } from 'expo-router'
@@ -37,11 +36,14 @@ export default function CommunityEvents({
 
     fetchEvents()
   }, [events])
-  const onEventPress = (eventId: string) =>
-    router.push({
-      pathname: '/eventDetails/[eventId]',
-      params: { eventId }
-    })
+  const onEventPress = useCallback(
+    (eventId: string) =>
+      router.push({
+        pathname: '/eventDetails/[eventId]',
+        params: { eventId }
+      }),
+    [router]
+  )
   const renderItem: ListRenderItem<PublicEventType> = useCallback(
     ({ item }) => (
       <CommunityEventCard onEventPress={onEventPress} event={item} />

@@ -9,12 +9,12 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import { useRegistration } from '@/hooks/useRegistration'
 import { PublicEventType } from '@/types/eventTypes'
-import { UserType } from '@/types/UserType'
 import RegistrationSummary from './RegistrationSummary'
 import { useTranslation } from 'react-i18next'
 import RegistrationConfirmation from './RegistrationConfirmation'
 import RegistrationForm from './RegistrationForm'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
+import { UserType } from '@/schemas/userSchema'
 
 type RegistrationProps = {
   event: PublicEventType
@@ -142,7 +142,7 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
             ticketSelections={ticketSelections}
           />
           <RegistrationForm
-            isFreeEvent={isFreeEvent}
+            isFreeEvent={isFreeEvent!}
             onSubmit={onSubmit}
             user={user}
             registrationId={currentRegistrationId}

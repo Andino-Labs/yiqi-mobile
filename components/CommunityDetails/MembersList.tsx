@@ -1,9 +1,9 @@
 import { View } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { Image } from 'expo-image'
 
-import { UserType } from '@/types/UserType'
 import { ImageOff } from 'lucide-react-native'
+import { UserType } from '@/schemas/userSchema'
 
 export default function Memberslist({ users }: { users: UserType[] }) {
   return (

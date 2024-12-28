@@ -1,11 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { Image } from 'expo-image'
 import { User } from 'lucide-react-native'
-import { UserType } from '@/types/UserType'
+import { UserType } from '@/schemas/userSchema'
 
-const UserInfo: React.FC<{ user: UserType }> = ({ user }) => {
+const UserInfo: React.FC<{ user: Pick<UserType, 'name' | 'picture'> }> = ({
+  user
+}) => {
   return (
     <View className="items-center my-6">
       {user?.picture ? (

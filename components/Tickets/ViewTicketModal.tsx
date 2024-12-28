@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
 import { useTranslation } from 'react-i18next'
 import { TicketDetails } from '@/app/(tabs)/tickets'
 import QRCode from 'react-native-qrcode-svg'

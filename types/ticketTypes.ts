@@ -3,7 +3,7 @@ export type EventTicket = {
   status: 'PENDING' | 'APPROVED' | 'REJECTED'
   description: string | null
   userId: string
-  category: 'GENERAL' | 'VIP' | 'STUDENT'
+  category: 'GENERAL' | 'VIP' | 'BACKSTAGE'
   checkedInDate: Date | null
   registration: {
     customFields: {

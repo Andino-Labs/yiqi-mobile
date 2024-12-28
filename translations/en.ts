@@ -145,6 +145,7 @@ export default {
   },
   profile: {
     profileSettings: 'Profile Settings',
+    networking: 'Networking',
     language: 'Language',
     support: 'Support',
     privacyPolicy: 'Privacy & Policy',
@@ -192,6 +193,60 @@ export default {
         'Are you sure you want to delete your account? This action cannot be undone.'
     }
   },
+  networkingSettings: {
+    networkingProfileTitle: 'Enhanced Networking Profile',
+    networkingProfileDescription:
+      'Help us create meaningful connections for you by sharing more about your professional journey. This information will be used to match you with relevant opportunities, events, and other professionals who share your interests and goals.',
+    networkingBenefits:
+      'Benefits include personalized event recommendations, curated networking opportunities, and tailored content based on your professional profile.',
+
+    // Form Labels
+    professionalMotivations: 'Professional Motivations',
+    professionalMotivationsLabel: 'What drives you to succeed?',
+    professionalMotivationsPlaceholder:
+      'Share what fuels your passion—innovation, leadership, helping others, personal growth...',
+
+    communicationStyle: 'Communication Style',
+    communicationStyleLabel:
+      'How would you describe your communication and interaction style?',
+    communicationStylePlaceholder:
+      'Are you more of a listener or speaker? Do you prefer collaboration or independent work?',
+
+    professionalValues: 'Professional Values',
+    professionalValuesLabel: 'What values guide your professional life?',
+    professionalValuesPlaceholder:
+      'Integrity, creativity, teamwork, social responsibility...',
+
+    careerAspirations: 'Career Aspirations',
+    careerAspirationsLabel: 'What are your long-term professional goals?',
+    careerAspirationsPlaceholder:
+      'Leadership roles, specialization, entrepreneurship...',
+
+    significantChallenge: 'Professional Challenge',
+    significantChallengeLabel:
+      "Share a significant professional challenge you've overcome",
+    significantChallengePlaceholder:
+      'What was the challenge and what did you learn from it?',
+
+    saveNetworkingProfile: 'Save Networking Profile',
+    networkingProfileSaved: 'Networking profile updated successfully',
+    networkingProfileError: 'Failed to update networking profile',
+    // Resume Upload
+    resumeUploadLabel: 'Upload Your Resume',
+    selectResume: 'Select Resume (PDF)',
+    currentResume: 'Current Resume:',
+    viewResume: 'View',
+    invalidFileType: 'Invalid File Type',
+    onlyPDFAllowed: 'Only PDF files are allowed',
+    fileTooLarge: 'File Too Large',
+    maxFileSize: 'Maximum file size is 5MB',
+    uploadingResume: 'Uploading resume...',
+    resumeUploadError: 'Failed to upload resume',
+    resumeProcessing: 'Processing resume...',
+    onlyPDFAndTXTAllowed: 'Only PDF and TXT files are allowed',
+    onlyPDFAndTXTAndDOCXAllowed: 'Only PDF, TXT and DOCX files are allowed',
+    selectResumeTypes: 'Select Resume (PDF, TXT or DOCX)'
+  },
   settings: {
     imagePicker: {
       camera: 'Camera',
@@ -202,10 +257,8 @@ export default {
         photoPermissions: {
           title: 'Permission Required',
           body: 'We need access to your photos to change your profile picture.',
-          buttons: {
-            cancel: 'Cancel',
-            openSettings: 'Open Settings'
-          }
+          cancel: 'Cancel',
+          openSettings: 'Open Settings'
         }
       },
       errors: {

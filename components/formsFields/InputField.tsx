@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextInput, Text, View } from 'react-native'
 import { Controller, FieldError, get, useFormContext } from 'react-hook-form'
-import { ThemedText } from '../ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 
 type InputFieldProps = {
   name: string
@@ -12,6 +12,7 @@ type InputFieldProps = {
   labelClassName?: string
   leftIcon?: React.ReactNode
   disabled?: boolean
+  textarea?: boolean
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -22,7 +23,8 @@ const InputField: React.FC<InputFieldProps> = ({
   containerClassName,
   labelClassName,
   leftIcon,
-  disabled
+  disabled,
+  textarea = false // New prop to toggle textarea behavior
 }) => {
   const {
     control,
@@ -46,18 +48,22 @@ const InputField: React.FC<InputFieldProps> = ({
           <View
             className={`flex-row items-center rounded-md border ${
               fieldError ? 'border-red-500' : 'border-neutral-600'
-            }  px-2 py-2`}
+            } ${textarea ? 'px-2 py-3' : 'px-2 py-2'}`} // Adjust padding for textarea
           >
-            {leftIcon && <View className={'mr-2'}>{leftIcon}</View>}
+            {leftIcon && !textarea && (
+              <View className={'mr-2'}>{leftIcon}</View>
+            )}
             <TextInput
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              // editable={!disabled}
               secureTextEntry={secureTextEntry}
               placeholder={placeholder}
               placeholderTextColor="gray"
-              className={'flex-1 text-white text-sm'}
+              multiline={textarea}
+              numberOfLines={textarea ? 3 : 1}
+              className={`flex-1 text-white text-sm`}
+              editable={!disabled}
             />
           </View>
         )}

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import trpc from '@/constants/trpc'
 import { Image } from 'expo-image'

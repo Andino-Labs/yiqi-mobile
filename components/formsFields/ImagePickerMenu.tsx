@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
 
-import { ThemedText } from '../ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { Colors } from '@/constants/Colors'
 import { CameraIcon, ImageIcon, TrashIcon } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import {
   TouchableOpacityProps
 } from 'react-native-gesture-handler'
 import { TextProps } from 'react-native'
-import AppBottomSheet from '../AppBottomSheet'
+import AppBottomSheet from '@/components/ui/AppBottomSheet'
 
 const ICON_SIZE = 25
 
@@ -69,5 +69,5 @@ const EditProfilePictureBottomSheet = forwardRef<BottomSheetModal, Props>(
     )
   }
 )
-
+EditProfilePictureBottomSheet.displayName = 'EditProfilePictureBottomSheet'
 export default EditProfilePictureBottomSheet

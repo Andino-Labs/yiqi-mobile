@@ -2,7 +2,7 @@ import React from 'react'
 import { Linking, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSelectedLanguage } from '@/i18n/utils'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRouter } from 'expo-router'
 import {
@@ -13,7 +13,7 @@ import {
   LanguagesIcon,
   CircleHelp
 } from 'lucide-react-native'
-import { Select } from '@/components/Select'
+import { Select } from '@/components/ui/Select'
 import UserInfo from '@/components/Profile/UserInfo'
 import { Colors } from '@/constants/Colors'
 import { ChevronRight } from 'lucide-react-native'
@@ -74,7 +74,12 @@ export default function Profile() {
             <Section
               icon={<Settings {...iconProps} />}
               text={t('profile.profileSettings')}
-              onPress={() => router.navigate('/(tabs)/profile/profileSettings')}
+              onPress={() => router.navigate('/settings/profileSettings')}
+            />
+            <Section
+              icon={<Settings {...iconProps} />}
+              text={t('profile.networking')}
+              onPress={() => router.navigate('/settings/networkingSettings')}
             />
             <Section
               icon={<LanguagesIcon {...iconProps} />}

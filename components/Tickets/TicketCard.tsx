@@ -1,26 +1,22 @@
 import React from 'react'
 import { View, Text, StyleProp, ViewStyle, Pressable } from 'react-native'
 import { Building2, ImageOff, Ticket } from 'lucide-react-native'
-import { PublicEventType } from '@/types/eventTypes'
 import { Image } from 'expo-image'
 import { useTranslation } from 'react-i18next'
 import TicketStatusBadge from './TicketBadge'
 import { TicketDetails } from '@/app/(tabs)/tickets'
-import { EventTicket } from '@/types/ticketTypes'
+import { ticketEventSchemaType } from '@/schemas/ticketSchema'
 
 const TicketCard: React.FC<{
-  event: PublicEventType
-  tickets: EventTicket[]
+  ticketDetails: ticketEventSchemaType
   onTicketPress: (ticket: TicketDetails) => void
   styles?: StyleProp<ViewStyle>
-}> = ({
-  onTicketPress,
-  event: { id, title, startDate, openGraphImage, organization, endDate },
-  tickets,
-  styles
-}) => {
+}> = ({ onTicketPress, ticketDetails, styles }) => {
   const { t } = useTranslation()
-
+  const {
+    event: { id, title, startDate, openGraphImage, organization, endDate },
+    tickets
+  } = ticketDetails
   const formatDate = (date: Date) =>
     date.toLocaleDateString('en-US', {
       day: '2-digit',

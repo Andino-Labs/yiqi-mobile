@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, TouchableOpacity, Pressable } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import MaskedView from '@react-native-masked-view/masked-view'
 import { Calendar, Users } from 'lucide-react-native'
-import { Image } from 'expo-image'
 import { useTranslation } from 'react-i18next'
-import { ThemedText } from '../ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
+import { GradientButton } from '@/components/ui/GradientButton'
+import { Image } from 'expo-image'
 interface HeroSectionProps {
   onCallToActionPress: () => void
 }
@@ -35,26 +36,14 @@ export default function HeroSection({ onCallToActionPress }: HeroSectionProps) {
           className={'h-10'}
         />
       </MaskedView>
-
       <ThemedText className={'text-gray-400 text-base mt-4'}>
         {t('Home.HeroSection.heroDescription')}
       </ThemedText>
-      <Pressable
-        className={'mt-6 w-full sm:w-auto'}
+      <GradientButton
+        text={t('Home.HeroSection.heroCTA')}
         onPress={onCallToActionPress}
-      >
-        <LinearGradient
-          colors={['#04F1FF', '#6de4e8']}
-          className={
-            'px-4 py-3 rounded-lg items-center justify-center bg-transparent'
-          }
-        >
-          <ThemedText className={'text-gray-800 text-base font-bold'}>
-            {t('Home.HeroSection.heroCTA')}
-          </ThemedText>
-        </LinearGradient>
-      </Pressable>
-
+        containerClassName={'mt-6'}
+      />
       <View className={'mt-10 space-y-4'}>
         <TouchableOpacity
           className={'p-4 rounded-xl border border-[#04F1FF]/20'}

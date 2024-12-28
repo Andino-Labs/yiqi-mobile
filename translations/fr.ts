@@ -145,6 +145,7 @@ export default {
   },
   profile: {
     profileSettings: 'Paramètres du profil',
+    networking: 'Networking',
     language: 'Langue',
     support: 'Support',
     privacyPolicy: 'Politique de confidentialité',
@@ -202,10 +203,8 @@ export default {
         photoPermissions: {
           title: 'Autorisation requise',
           body: "Nous avons besoin d'accéder à vos photos pour changer votre photo de profil.",
-          buttons: {
-            cancel: 'Annuler',
-            openSettings: 'Ouvrir les paramètres'
-          }
+          cancel: 'Annuler',
+          openSettings: 'Ouvrir les paramètres'
         }
       },
       errors: {

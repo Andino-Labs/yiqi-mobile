@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import * as SecureStore from 'expo-secure-store'
-import { UserType } from '@/types/UserType'
 import { secureStorageKeys } from '@/constants/SecureStore'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { UserType } from '@/schemas/userSchema'
 
 type Session = {
   user?: UserType
@@ -11,6 +11,7 @@ type Session = {
 
 type AuthContextProps = {
   session: Session
+  updateUserSession: (user: UserType) => void
   signIn: (user: UserType, token: string) => void
   signOut: () => void
 }
@@ -74,9 +75,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log(error)
     }
   }
-
+  const updateUserSession = async (user: UserType) => {
+    await SecureStore.setItemAsync(
+      secureStorageKeys.USER_INFO,
+      JSON.stringify(user)
+    )
+    if (session.user) {
+      const newUserData = {
+        ...session,
+        user: {
+          ...session.user,
+          id: session.user.id,
+          name: user.name || session.user?.name,
+          picture: user.picture || session.user?.email
+        }
+      }
+      setSession(newUserData)
+    }
+  }
   return (
-    <AuthContext.Provider value={{ session, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ session, updateUserSession, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   )

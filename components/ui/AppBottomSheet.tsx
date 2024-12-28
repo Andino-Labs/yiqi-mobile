@@ -2,8 +2,7 @@ import React, { forwardRef, useCallback } from 'react'
 import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
-  BottomSheetModal,
-  BottomSheetView
+  BottomSheetModal
 } from '@gorhom/bottom-sheet'
 import { Colors } from '@/constants/Colors'
 

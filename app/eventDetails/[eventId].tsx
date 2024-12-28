@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Pressable
 } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
+import { ThemedText } from '@/components/ui/ThemedText'
 import trpc from '@/constants/trpc'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Image } from 'expo-image'
@@ -17,7 +17,7 @@ import { Stack, router, useLocalSearchParams } from 'expo-router'
 import LocationMap from '@/components/LocationMap'
 import { useTranslation } from 'react-i18next'
 
-import { ArrowLeft, ChevronLeft } from 'lucide-react-native'
+import { ChevronLeft } from 'lucide-react-native'
 import { Colors } from '@/constants/Colors'
 import { PublicEventType } from '@/types/eventTypes'
 import { useAuthContext } from '@/context/AuthContext'

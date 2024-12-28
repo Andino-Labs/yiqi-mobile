@@ -74,11 +74,7 @@ export default function Events() {
           <FlashList
             data={data}
             renderItem={({ item }) => (
-              <TicketCard
-                onTicketPress={onTicketPress}
-                event={item.event}
-                tickets={item.tickets}
-              />
+              <TicketCard onTicketPress={onTicketPress} ticketDetails={item} />
             )}
             onEndReachedThreshold={0.8}
             ListFooterComponent={renderFooter}

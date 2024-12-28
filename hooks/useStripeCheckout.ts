@@ -54,7 +54,7 @@ const useStripeCheckout = ({
     }
 
     initializeStripe()
-  }, [registrationId])
+  }, [registrationId, initPaymentSheet, createCheckoutSession])
 
   const handlePayment = async () => {
     if (!paymentConfig) {

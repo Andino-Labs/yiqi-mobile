@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, TextInput } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import StripeCheckout from '@/components/Checkout/StripeCheckout'
-import { UserType } from '@/types/UserType'
 import { useTranslation } from 'react-i18next'
+import { UserType } from '@/schemas/userSchema'
 
 interface RegistrationFormProps {
   user?: UserType
