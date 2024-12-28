@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Colors } from '@/constants/Colors'
-import { Tabs, router } from 'expo-router'
+import { Tabs } from 'expo-router'
 import React from 'react'
 import { Calendar, Users, User2, HomeIcon, Ticket } from 'lucide-react-native'
 import trpc from '@/constants/trpc'
@@ -16,7 +16,6 @@ export default function TabLayout() {
   if (!isPrefetched) {
     return null
   }
-  if (true) router.navigate('/onBoarding')
   return (
     <Tabs
       screenOptions={{

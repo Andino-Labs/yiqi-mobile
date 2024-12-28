@@ -3,7 +3,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'yiqi-mobile',
   slug: 'yiqi-mobile',
-  version: '1.0.2',
+  version: process.env.EXPO_PUBLIC_APP_VERSION,
   orientation: 'portrait',
   icon: './assets/images/icon.png',
   scheme: 'yiqi',
@@ -24,7 +24,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: 'com.andinolabs.yiqi',
-    versionCode: 4,
+    versionCode: 5,
+
     softwareKeyboardLayoutMode: 'pan',
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',

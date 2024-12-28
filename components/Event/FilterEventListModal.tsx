@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, TextInput, Text, Pressable } from 'react-native'
-import { Modal } from '@/components/ui/Modal'
+import Modal from '@/components/ui/Modal'
 import { Ionicons } from '@expo/vector-icons'
 import DateTimePicker, {
   DateTimePickerEvent

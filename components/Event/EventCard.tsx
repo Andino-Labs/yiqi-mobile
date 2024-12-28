@@ -20,7 +20,7 @@ const EventCard: React.FC<{
   event: {
     id,
     title,
-    location,
+    city,
     startDate,
     openGraphImage,
     organization,
@@ -70,7 +70,7 @@ const EventCard: React.FC<{
           </View>
           <View className="flex-row items-center">
             <MapPin size={16} color="white" />
-            <Text className="text-gray-300 text-sm ml-2">{location}</Text>
+            <Text className="text-gray-300 text-sm ml-2">{city}</Text>
           </View>
         </View>
       </View>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum EventTypeEnum {
   ONLINE = 'ONLINE',
   IN_PERSON = 'IN_PERSON'
