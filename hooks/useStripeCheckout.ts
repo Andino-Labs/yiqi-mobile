@@ -10,10 +10,7 @@ const useStripeCheckout = ({
   registrationId
 }: StripeCheckoutProps) => {
   const [loading, setLoading] = useState(false)
-  const [paymentConfig, setPaymentConfig] = useState<{
-    clientSecret: string
-    stripeAccount: string
-  } | null>(null)
+
   const { initPaymentSheet, presentPaymentSheet } = useStripe()
   const createCheckoutSession = trpc.createCheckoutSession.useMutation()
 
@@ -23,16 +20,13 @@ const useStripeCheckout = ({
         setLoading(true)
 
         // Fetch client secret and stripeAccount from the backend
-        const { clientSecret, connectAccountId } =
-          await createCheckoutSession.mutateAsync({
-            registrationId
-          })
+        const { clientSecret } = await createCheckoutSession.mutateAsync({
+          registrationId
+        })
 
-        if (!clientSecret || !connectAccountId) {
+        if (!clientSecret) {
           throw new Error('Missing required Stripe configuration.')
         }
-
-        setPaymentConfig({ clientSecret, stripeAccount: connectAccountId })
 
         // Initialize Stripe Payment Sheet for the connected account
         const { error } = await initPaymentSheet({
@@ -54,16 +48,10 @@ const useStripeCheckout = ({
     }
 
     initializeStripe()
-  }, [registrationId, initPaymentSheet, createCheckoutSession])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [registrationId, initPaymentSheet])
 
   const handlePayment = async () => {
-    if (!paymentConfig) {
-      showToast('Payment is not ready. Please try again', {
-        type: 'error'
-      })
-      return
-    }
-
     try {
       setLoading(true)
 
@@ -82,7 +70,7 @@ const useStripeCheckout = ({
       setLoading(false)
     }
   }
-  return { loading, handlePayment, paymentConfig }
+  return { loading, handlePayment }
 }
 
 export default useStripeCheckout

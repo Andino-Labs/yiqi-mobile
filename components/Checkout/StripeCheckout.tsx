@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { StripeProvider } from '@stripe/stripe-react-native'
 import useStripeCheckout from '@/hooks/useStripeCheckout'
 import { Colors } from '@/constants/Colors'
+import { useTranslation } from 'react-i18next'
 const publishableKey = process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
 
 export type StripeCheckoutProps = {
@@ -11,13 +12,10 @@ export type StripeCheckoutProps = {
 }
 
 export default function StripeCheckout(props: StripeCheckoutProps) {
-  const { loading, handlePayment, paymentConfig } = useStripeCheckout(props)
-
+  const { loading, handlePayment } = useStripeCheckout(props)
+  const { t } = useTranslation()
   return (
-    <StripeProvider
-      publishableKey={publishableKey}
-      stripeAccountId={paymentConfig?.stripeAccount}
-    >
+    <StripeProvider publishableKey={publishableKey}>
       {loading ? (
         <ActivityIndicator
           className=" py-2"
@@ -30,7 +28,7 @@ export default function StripeCheckout(props: StripeCheckoutProps) {
           onPress={handlePayment}
         >
           <Text className="text-white text-center font-bold">
-            Proceed to Payment
+            {t('Registration.ticketPayment')}
           </Text>
         </TouchableOpacity>
       )}

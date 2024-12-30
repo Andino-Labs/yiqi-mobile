@@ -9,10 +9,10 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useRouter } from 'expo-router'
 
 export default function Home() {
-  const { data } = trpc.getPublicEvents.useQuery({
-    limit: 8
-  })
-  const { data: communities } = trpc.getCommunities.useQuery({ limit: 4 })
+  const [eventsQuery, communitiesQuery] = trpc.useQueries(t => [
+    t.getPublicEvents({ limit: 8 }),
+    t.getCommunities({ limit: 4, page: 1 })
+  ])
   const { authenticated } = useCurrentUser()
   const router = useRouter()
 
@@ -25,8 +25,8 @@ export default function Home() {
   const renderContent = () => (
     <>
       <HeroSection onCallToActionPress={onCallToActionPress} />
-      <FeaturedEventList events={data?.events} />
-      <CommunitiesList communities={communities?.communities} />
+      <FeaturedEventList events={eventsQuery?.data?.events} />
+      <CommunitiesList communities={communitiesQuery?.data?.communities} />
     </>
   )
 
