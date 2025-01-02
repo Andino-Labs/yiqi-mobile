@@ -95,6 +95,16 @@ export const luciaUserSchema = z.object({
   email: z.string(),
   picture: z.string().nullable()
 })
+export const ProfileFormSchema = profileWithPrivacySchema.extend({
+  picture: z
+    .any()
+    .refine(
+      file => (file?.size ? file.size <= 10000000 : true),
+      'Max image size is 10MB.'
+    )
+    .nullable()
+    .optional()
+})
 
 export type LuciaUserType = z.infer<typeof luciaUserSchema>
 export type UserDataCollected = z.infer<typeof userDataCollectedShema>

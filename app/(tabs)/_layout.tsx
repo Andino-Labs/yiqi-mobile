@@ -29,6 +29,7 @@ export default function TabLayout() {
         options={{
           title: 'Events',
           headerShown: false,
+          lazy: false,
           tabBarIcon: ({ color }) => <Calendar size={20} color={color} />
         }}
       />
@@ -37,6 +38,7 @@ export default function TabLayout() {
         options={{
           title: 'Communities',
           headerShown: false,
+          lazy: false,
           tabBarIcon: ({ color }) => <Users size={20} color={color} />
         }}
       />

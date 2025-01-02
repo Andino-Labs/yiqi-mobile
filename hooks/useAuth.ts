@@ -40,7 +40,8 @@ export function useAuth() {
           await signIn(user, sessionId)
         }
         showToast('Login Success')
-        router.back()
+        // TODO: Update this to include specific navigation conditions
+        router.navigate('/onBoarding')
       } else {
         throw new Error('Google ID Token not received')
       }
@@ -69,7 +70,8 @@ export function useAuth() {
           await signIn(response.user, response.sessionId)
         }
         showToast('Login Success')
-        router.back()
+        // TODO: Update this to include specific navigation conditions
+        router.navigate('/onBoarding')
       }
     } catch (error) {
       errorHandler(error)

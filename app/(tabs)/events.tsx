@@ -29,13 +29,14 @@ export default function Events() {
     closeModal,
     openModal,
     modalVisible,
-    applyFilters
+    applyFilters,
+    isInitialLoading
   } = useEventList()
   const router = useRouter()
   const { t } = useTranslation()
 
   const renderFooter = useCallback(() => {
-    if (isLoading) {
+    if (!isInitialLoading && isLoading) {
       return (
         <ActivityIndicator
           className=" py-2"
@@ -46,7 +47,7 @@ export default function Events() {
     }
 
     return null
-  }, [isLoading])
+  }, [isInitialLoading, isLoading])
 
   const keyExtractor = useCallback(
     (item: PublicEventType, index: number) =>
@@ -60,7 +61,7 @@ export default function Events() {
   )
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView className="flex-grow bg-black">
       <View className="flex-row items-center justify-between p-2">
         <Pressable onPress={() => router.back()}>
           <ChevronLeft color="white" size={24} />

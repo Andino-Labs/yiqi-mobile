@@ -17,7 +17,7 @@ const { width } = Dimensions.get('window')
 const OnBoarding = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const progress = useSharedValue(0)
-  const pagerRef = useRef<PagerView>(null) // Ref for PagerView
+  const pagerRef = useRef<PagerView>(null)
   const { data } = trpc.getUserProfile.useQuery()
 
   const steps = [
@@ -35,21 +35,36 @@ const OnBoarding = () => {
       }
     )
   }
-  const handleStepChange = (direction: 'next' | 'back') => {
-    const nextStep = currentStep + (direction === 'next' ? 1 : -1)
-    if (nextStep >= 0 && nextStep < steps.length) {
+
+  const handleBack = () => {
+    if (currentStep === 0 && router.canGoBack()) {
+      router.back()
+      return
+    }
+
+    const previousStep = currentStep - 1
+    if (previousStep >= 0) {
+      setCurrentStep(previousStep)
+      updateProgress(previousStep)
+      pagerRef.current?.setPage(previousStep)
+    }
+  }
+
+  const handleStepChange = () => {
+    const nextStep = currentStep + 1
+    if (nextStep < steps.length) {
       setCurrentStep(nextStep)
       updateProgress(nextStep)
       pagerRef.current?.setPage(nextStep)
-    } else if (direction === 'back' && currentStep === 0) {
-      router.back()
+    } else {
+      router.navigate('/(tabs)')
     }
   }
 
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row justify-between items-center m-4">
-        <Pressable onPress={() => handleStepChange('back')}>
+        <Pressable onPress={handleBack}>
           <ArrowLeft color="white" />
         </Pressable>
         <ThemedText className="text-lg font-semibold text-center">
@@ -59,46 +74,28 @@ const OnBoarding = () => {
           <X color="white" />
         </Pressable>
       </View>
+
       <ProgressBar progress={progress} />
-      {/* PagerView for Screens */}
+
       <PagerView
-        ref={pagerRef} // Attach ref to PagerView
+        ref={pagerRef}
         style={{ flex: 1 }}
         initialPage={0}
+        scrollEnabled={false}
         onPageSelected={e => {
-          setCurrentStep(e.nativeEvent.position)
-          updateProgress(e.nativeEvent.position)
+          const position = e.nativeEvent.position
+          setCurrentStep(position)
+          updateProgress(position)
         }}
       >
-        <View key="1" className="p-4">
-          {data && <StepOne user={data} />}
-        </View>
-        <View key="2" className="p-4">
-          {data && <StepTwo user={data} />}
-        </View>
-
-        <View key="3" className="p-4">
-          {data && <StepThree initialData={data} />}
-        </View>
+        {[StepOne, StepTwo, StepThree].map((StepComponent, index) => (
+          <View key={index} className="p-4">
+            {data && (
+              <StepComponent handleStepChange={handleStepChange} user={data} />
+            )}
+          </View>
+        ))}
       </PagerView>
-      {/* <View className="flex-row justify-between p-2">
-        {currentStep > 0 && (
-          <TouchableOpacity
-            onPress={handleBack}
-            className="px-4 py-2 rounded-lg"
-          >
-            <ThemedText className="text-gray-700">Back</ThemedText>
-          </TouchableOpacity>
-        )}
-        <TouchableOpacity
-          onPress={handleNext}
-          className="px-4 py-2  rounded-lg"
-        >
-          <ThemedText className="text-white">
-            {currentStep < steps.length - 1 ? 'Next' : 'Submit'}
-          </ThemedText>
-        </TouchableOpacity>
-      </View> */}
     </SafeAreaView>
   )
 }

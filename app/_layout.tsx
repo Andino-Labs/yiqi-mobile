@@ -77,17 +77,17 @@ export default function RootLayout() {
             <AuthProvider>
               <RootSiblingParent>
                 <BottomSheetModalProvider>
-                  <Stack initialRouteName="onBoarding">
-                    <Stack.Screen
-                      name="onBoarding"
-                      options={{ headerShown: false }}
-                    />
+                  <Stack>
                     <Stack.Screen
                       name="(tabs)"
                       options={{ headerShown: false }}
                     />
                     <Stack.Screen
                       name="login"
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="onBoarding"
                       options={{ headerShown: false }}
                     />
                     <Stack.Screen name="+not-found" />

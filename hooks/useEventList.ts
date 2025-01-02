@@ -19,7 +19,7 @@ export const useEventList = () => {
   const [events, setEvents] = useState<any[]>([])
 
   // Fetch events with filters, pagination
-  const { data, refetch, isFetching, isLoading } =
+  const { data, refetch, isFetching, isLoading, isInitialLoading } =
     trpc.getPublicEvents.useQuery({ ...searchFilters, page, limit: 8 })
   // Prefetch event details
   const queryClient = useQueryClient()
@@ -98,6 +98,7 @@ export const useEventList = () => {
     searchFilters,
     onEventPress,
     isLoading,
+    isInitialLoading,
     applyFilters,
     closeModal,
     openModal,

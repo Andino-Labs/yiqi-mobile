@@ -7,7 +7,7 @@ import trpc from '@/constants/trpc'
 import UpdateNetworkingForm from '@/components/Profile/UpdateNetworkingForm'
 import { t } from 'i18next'
 
-export default function ProfileSettings() {
+export default function NetWorkingSettings() {
   const { data } = trpc.getUserProfile.useQuery()
 
   return (

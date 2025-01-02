@@ -17,7 +17,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@andino-labs/yiqi-client": "1.0.14",
+    "@andino-labs/yiqi-client": "1.0.15",
     "@expo/vector-icons": "^14.0.2",
     "@gcou/react-native-linkedin": "^2.3.1",
     "@gorhom/bottom-sheet": "^5.0.6",

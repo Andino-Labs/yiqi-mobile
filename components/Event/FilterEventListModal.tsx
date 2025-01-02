@@ -40,12 +40,8 @@ export default function FilterEventListModal({
     ) {
       setLocalFilters(searchFilters)
     }
-  }, [
-    localFilters.startDate,
-    localFilters.title,
-    localFilters.type,
-    searchFilters
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchFilters])
 
   const onDateChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
     if (!selectedDate) return
