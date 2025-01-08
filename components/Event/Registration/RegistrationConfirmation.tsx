@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { RegistrationType } from '@/types/RegistrationType'
 import StripeCheckout from '@/components/Checkout/StripeCheckout'
-import showToast from '@/helpers/showToast'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
 import { useTranslation } from 'react-i18next'
+import { router } from 'expo-router'
 
 interface RegistrationConfirmationProps {
   registration: RegistrationType
@@ -26,7 +26,7 @@ function RegistrationConfirmation({
     handlePaymentComplete(registration.id).then(() =>
       setIsPaymentDialogOpen(false)
     )
-
+  const navigateToTicketList = () => router.navigate('/(tabs)/tickets')
   if (requiresPayment && !registration.paid) {
     return (
       <View className="bg-gray-900 flex-1 p-4">
@@ -79,7 +79,9 @@ function RegistrationConfirmation({
                 className="bg-red-600 p-3 rounded-lg mt-2"
                 onPress={() => setIsPaymentDialogOpen(false)}
               >
-                <Text className="text-white text-center font-bold">Cancel</Text>
+                <Text className="text-white text-center font-bold">
+                  {t('general.cancel')}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -108,7 +110,7 @@ function RegistrationConfirmation({
         </Text>
         <TouchableOpacity
           className="bg-gray-600 p-3 rounded-lg"
-          onPress={() => showToast('Not implemented!', { type: 'warning' })}
+          onPress={navigateToTicketList}
         >
           <Text className="text-white text-center font-bold">
             {t('Registration.viewMyTickets')}

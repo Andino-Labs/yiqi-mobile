@@ -13,7 +13,11 @@ const showToast = (toastMessage: string, options?: ToastProps) => {
     position: Toast.positions.BOTTOM,
     animation: true,
     hideOnPress: true,
-    textColor: type == 'success' ? Colors.dark.text : Colors.light.text,
+    containerStyle: type === 'success' && {
+      borderColor: Colors.dark.tint,
+      borderWidth: 1
+    },
+    textColor: type === 'success' ? Colors.dark.text : Colors.light.text,
     backgroundColor: getBackgroundColor(type),
     ...toastOptions
   })
@@ -22,7 +26,7 @@ const showToast = (toastMessage: string, options?: ToastProps) => {
 function getBackgroundColor(type: ToastProps['type']): string {
   switch (type) {
     case 'success':
-      return Colors.dark.success
+      return '#404040'
     case 'error':
       return Colors.dark.error
     case 'warning':

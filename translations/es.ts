@@ -14,7 +14,10 @@ export default {
     Going: 'Asistirán',
     reset: 'Restablecer',
     apply: 'Aplicar',
-    showMore: 'Mostrar más'
+    showMore: 'Mostrar más',
+    login: 'Iniciar sesión',
+    confirm: 'Eliminar',
+    cancel: 'Cancelar'
   },
   loginScreen: {
     welcome: 'Bienvenido a Yiqi',
@@ -107,5 +110,181 @@ export default {
     seeAllEvents: 'Ver todos los eventos',
     noEventsFound: 'No se encontraron eventos',
     noDescriptionAvailable: 'No hay descripción disponible'
+  },
+  tickets: {
+    ticketStatusApproved: 'Aprobado',
+    ticketStatusPending: 'Pendiente',
+    ticketStatusRejected: 'Rechazado',
+    ticketTitlePage: 'Tus entradas',
+    ticketNo: 'No tienes ningun ticket',
+    ticketEventImageAlt: 'Banner del evento',
+    ticketNumber: 'Entrada #',
+    ticketLabelView: 'Ver entrada',
+    ticketPaymentRequired: 'Se requiere pago',
+    ticketPayment: 'Pagar ahora',
+    qrModalTicketLabel: 'Entrada #',
+    qrModalTicketName: 'Nombre',
+    qrModalTicketEmail: 'Correo electrónico',
+    qrModalTicketStatus: 'Estado',
+    qrModalTicketChecked: 'Verificado',
+    qrModalTicketNotChecked: 'No verificado',
+    loggedOutTitle: '¿Buscas tus entradas?',
+    loggedOutDescription:
+      'Inicia sesión en la misma cuenta o utiliza el correo electrónico que recibió tus entradas para ver la lista de entradas.'
+  },
+  community: {
+    communities: 'Comunidades',
+    noCommunitiesFound: 'No se encontraron comunidades en este momento.',
+    about: 'Acerca de',
+    aboutShowLess: 'Mostrar menos',
+    aboutLoadMore: 'Cargar más',
+    eventsUpcomingEvents: 'Próximos eventos',
+    eventsPastEvents: 'Eventos pasados',
+    members: 'Miembros',
+    membersOrganizedBy: 'Organizado por',
+    memberOrganizers: 'Organizadores',
+    noEventAvailable: 'No hay eventos disponibles',
+    noEventAvailableDescription: '¡Vuelve más tarde para más actualizaciones!'
+  },
+  profile: {
+    profileSettings: 'Configuración de perfil',
+    networking: 'Networking',
+    language: 'Idioma',
+    support: 'Soporte',
+    privacyPolicy: 'Política de privacidad',
+    notLoggedIn: 'No has iniciado sesión.',
+    appVersion: 'Versión de la app',
+    signOut: 'Cerrar sesión',
+    languages: {
+      en: 'Inglés',
+      es: 'Español',
+      fr: 'Francés',
+      pt: 'Portugués'
+    }
+  },
+  profileSettings: {
+    name: 'Nombre',
+    phoneNumber: 'Número de teléfono',
+    company: 'Empresa',
+    position: 'Cargo',
+    bio: 'Biografía',
+    saveChanges: 'Guardar cambios',
+    saving: 'Guardando...',
+    profileUpdated: 'Perfil actualizado con éxito',
+    error: 'Error',
+    failedToUpdate:
+      'Error al actualizar el perfil. Por favor, intente nuevamente.',
+    enterYourName: 'Introduce tu nombre',
+    enterYourEmail: 'Introduce tu correo electrónico',
+    enterYourPhone: 'Introduce tu número de teléfono',
+    enterYourCompany: 'Introduce tu empresa',
+    enterYourPosition: 'Introduce tu cargo',
+    tellUsAboutYourself: 'Cuéntanos sobre ti',
+    setToPublic: 'Establecer como público',
+    User: 'Usuario',
+    profileSettings: 'Configuración del Perfil',
+    enterYourX: 'Introduce tu link de x',
+    enterInstagramURL: 'Introduce tu link de Instagram',
+    enterWebsiteURL: 'Introduce tu link de sitio web',
+    enterLinkedinURL: 'Introduce tu link de LinkedIn',
+    website: 'Sitio web',
+    stopCommunications: 'Detener Comunicaciones',
+    disableCommunications: 'Deshabilitar todas las comunicaciones',
+    role: 'Rol',
+    deleteModal: {
+      title: 'Eliminar cuenta',
+      description:
+        '¿Está seguro de que desea eliminar su cuenta? Esta acción no se puede deshacer.'
+    }
+  },
+  networkingSettings: {
+    networkingProfileTitle: 'Perfil de Networking Mejorado',
+    networkingProfileDescription:
+      'Ayúdanos a crear conexiones significativas para ti compartiendo más sobre tu viaje profesional. Esta información se utilizará para emparejarte con oportunidades relevantes, eventos y otros profesionales que comparten tus intereses y objetivos.',
+    networkingBenefits:
+      'Los beneficios incluyen recomendaciones de eventos personalizados, oportunidades de networking seleccionadas y contenido personalizado basado en tu perfil profesional.',
+
+    // Form Labels
+    professionalMotivations: 'Motivaciones Profesionales',
+    professionalMotivationsLabel: '¿Qué te motiva para tener éxito?',
+    professionalMotivationsPlaceholder:
+      'Comparte lo que te apasiona—innovación, liderazgo, ayudar a otros, crecimiento personal...',
+
+    communicationStyle: 'Estilo de Comunicación',
+    communicationStyleLabel:
+      '¿Cómo describirías tu estilo de comunicación y interacción?',
+    communicationStylePlaceholder:
+      '¿Eres más de un oyente o orador? ¿Prefieres colaborar o trabajar de manera independiente?',
+
+    professionalValues: 'Valores Profesionales',
+    professionalValuesLabel: '¿Qué valores guían tu vida profesional?',
+    professionalValuesPlaceholder:
+      'Integridad, creatividad, trabajo en equipo, responsabilidad social...',
+
+    careerAspirations: 'Metas Profesionales',
+    careerAspirationsLabel:
+      '¿Cuáles son tus objetivos profesionales a largo plazo?',
+    careerAspirationsPlaceholder:
+      'Roles de liderazgo, especialización, emprendimiento...',
+
+    significantChallenge: 'Desafío Profesional',
+    significantChallengeLabel:
+      'Comparte un desafío profesional significativo que has superado',
+    significantChallengePlaceholder:
+      '¿Cuál fue el desafío y qué aprendiste de él?',
+
+    saveNetworkingProfile: 'Guardar Perfil de Networking',
+    networkingProfileSaved: 'Perfil de networking actualizado exitosamente',
+    networkingProfileError: 'Error al actualizar el perfil de networking',
+    // Resume Upload
+    resumeUploadLabel: 'Subir Su Hoja de Vida (CV)',
+    selectResume: 'Seleccionar Hoja de Vida (PDF, TXT)',
+    currentResume: 'Hoja de Vida Actual:',
+    viewResume: 'Ver',
+    invalidFileType: 'Tipo de Archivo Inválido',
+    onlyPDFAllowed: 'Solo se permiten archivos PDF',
+    fileTooLarge: 'Archivo Too Grande',
+    maxFileSize: 'El tamaño máximo del archivo es de 5MB',
+    uploadingResume: 'Subiendo hoja de vida...',
+    resumeUploadError: 'Error al subir la hoja de vida',
+    resumeProcessing: 'Procesando hoja de vida...',
+    onlyPDFAndTXTAllowed: 'Solo se permiten archivos PDF, TXT y DOCX',
+    selectResumeTypes: 'Seleccionar Hoja de Vida (PDF, TXT o DOCX)'
+  },
+  settings: {
+    camera: 'Camera',
+    photo: 'Photo',
+    delete: 'Delete',
+    imagePicker: {
+      edit: 'Editar foto de perfil',
+      alert: {
+        photoPermissions: {
+          title: 'Permiso requerido',
+          body: 'Necesitamos acceso a tus fotos para cambiar tu foto de perfil.',
+          cancel: 'Cancelar',
+          openSettings: 'Abrir configuración'
+        }
+      },
+      errors: {
+        openPhotosFailure: 'Error al abrir la biblioteca de fotos.',
+        openCameraFailure: 'Error al abrir la cámara.'
+      },
+      updateModal: {
+        title: 'Actualizando foto de perfil',
+        error: 'No se pudo actualizar tu foto de perfil.',
+        buttons: {
+          retry: 'Reintentar',
+          discard: 'Descartar'
+        }
+      },
+      deleteModal: {
+        title: 'Eliminando foto de perfil',
+        error: 'No se pudo eliminar tu foto de perfil.',
+        buttons: {
+          retry: 'Reintentar',
+          discard: 'Descartar'
+        }
+      }
+    }
   }
 }

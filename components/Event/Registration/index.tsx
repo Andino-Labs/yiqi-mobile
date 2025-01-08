@@ -9,12 +9,12 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import { useRegistration } from '@/hooks/useRegistration'
 import { PublicEventType } from '@/types/eventTypes'
-import { UserType } from '@/types/UserType'
 import RegistrationSummary from './RegistrationSummary'
 import { useTranslation } from 'react-i18next'
 import RegistrationConfirmation from './RegistrationConfirmation'
 import RegistrationForm from './RegistrationForm'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
+import { UserType } from '@/schemas/userSchema'
 
 type RegistrationProps = {
   event: PublicEventType
@@ -125,33 +125,31 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
         </TouchableOpacity>
       </View>
 
-      {user && (
-        <Modal isOpen={isModalVisible} onDismiss={() => setModalVisible(false)}>
-          <View className="bg-gray-800 p-4 rounded-lg">
-            <View className="flex-row justify-between items-start">
-              <Pressable
-                onPress={() => setModalVisible(false)}
-                className="ml-auto"
-              >
-                <Ionicons name="close" color={'white'} size={20} />
-              </Pressable>
-            </View>
-
-            <RegistrationSummary
-              calculateTotal={calculateTotal}
-              tickets={event?.tickets}
-              ticketSelections={ticketSelections}
-            />
-            <RegistrationForm
-              isFreeEvent={isFreeEvent}
-              onSubmit={onSubmit}
-              user={user}
-              registrationId={currentRegistrationId}
-              handlePaymentComplete={handlePaymentComplete}
-            />
+      <Modal isOpen={isModalVisible} onDismiss={() => setModalVisible(false)}>
+        <View className="bg-gray-800 p-4 rounded-lg">
+          <View className="flex-row justify-between items-start">
+            <Pressable
+              onPress={() => setModalVisible(false)}
+              className="ml-auto"
+            >
+              <Ionicons name="close" color={'white'} size={20} />
+            </Pressable>
           </View>
-        </Modal>
-      )}
+
+          <RegistrationSummary
+            calculateTotal={calculateTotal}
+            tickets={event?.tickets}
+            ticketSelections={ticketSelections}
+          />
+          <RegistrationForm
+            isFreeEvent={isFreeEvent!}
+            onSubmit={onSubmit}
+            user={user}
+            registrationId={currentRegistrationId}
+            handlePaymentComplete={handlePaymentComplete}
+          />
+        </View>
+      </Modal>
     </>
   )
 }

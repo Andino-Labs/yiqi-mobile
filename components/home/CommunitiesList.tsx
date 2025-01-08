@@ -3,8 +3,8 @@ import CommunityCard from './CommunityCard'
 import { CommunitiesType } from '@/types/communitiesType'
 import { Link, useRouter } from 'expo-router'
 import { useTranslation } from 'react-i18next'
-import { ThemedText } from '../ThemedText'
-import { ThemedView } from '../ThemedView'
+import { ThemedText } from '@/components/ui/ThemedText'
+import { ThemedView } from '@/components/ui/ThemedView'
 import { FlashList, ListRenderItem } from '@shopify/flash-list'
 
 interface CommunitiesListProps {
@@ -31,6 +31,7 @@ export default function CommunitiesList({ communities }: CommunitiesListProps) {
         community={item}
       />
     ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
   return (

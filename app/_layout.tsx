@@ -14,6 +14,10 @@ import { API } from '@/constants/apis'
 import '@/i18n'
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { LogBox } from 'react-native'
+import { AuthProvider } from '@/context/AuthContext'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 // until they merge the fix next update https://github.com/meliorence/react-native-render-html/issues/661
 if (__DEV__) {
   const ignoreErrors = ['Support for defaultProps will be removed']
@@ -42,9 +46,11 @@ export default function RootLayout() {
             const token =
               (await SecureStore.getItemAsync(secureStorageKeys.TOKEN)) ?? ''
 
-            return {
-              authorization: `Bearer ${token}`
-            }
+            if (token)
+              return {
+                authorization: `Bearer ${token}`
+              }
+            return {}
           }
         })
       ]
@@ -53,7 +59,6 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
   })
-
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync()
@@ -65,18 +70,34 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={DarkTheme}>
-      <trpc.Provider client={trpcClient} queryClient={queryClient}>
-        <QueryClientProvider client={queryClient}>
-          <RootSiblingParent>
-            <Stack initialRouteName="(tabs)">
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="login" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </RootSiblingParent>
-        </QueryClientProvider>
-      </trpc.Provider>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={DarkTheme}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <RootSiblingParent>
+                <BottomSheetModalProvider>
+                  <Stack>
+                    <Stack.Screen
+                      name="(tabs)"
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="login"
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                      name="onBoarding"
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name="+not-found" />
+                  </Stack>
+                </BottomSheetModalProvider>
+              </RootSiblingParent>
+            </AuthProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   )
 }

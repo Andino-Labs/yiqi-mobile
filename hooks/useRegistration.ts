@@ -2,8 +2,9 @@ import showToast from '@/helpers/showToast'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import trpc from '@/constants/trpc'
 import { PublicEventType } from '@/types/eventTypes'
-import { UserType } from '@/types/UserType'
 import { errorHandler } from '@/helpers/errorHandler'
+import { RegistrationType } from '@/types/RegistrationType'
+import { UserType } from '@/schemas/userSchema'
 
 export const useRegistration = (event: PublicEventType, user?: UserType) => {
   const [ticketSelections, setTicketSelections] = useState<
@@ -11,7 +12,8 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
   >({})
   const [isModalVisible, setModalVisible] = useState(false)
   const [isLoadingRegistration, setIsLoadingRegistration] = useState(true)
-  const [existingRegistration, setExistingRegistration] = useState(null)
+  const [existingRegistration, setExistingRegistration] =
+    useState<RegistrationType | null>(null)
   const [currentRegistrationId, setCurrentRegistrationId] = useState<
     string | undefined
   >()
@@ -20,7 +22,7 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
   const markRegistrationPaid = trpc.markRegistrationPaid.useMutation()
 
   const isFreeEvent = useMemo(
-    () => event.tickets.every(ticket => ticket.price === 0),
+    () => event.tickets?.every(ticket => ticket.price === 0),
     [event.tickets]
   )
   const checkRegistration = useCallback(async () => {
@@ -35,10 +37,10 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
       }
     }
     setIsLoadingRegistration(false)
-  }, [user, event.id])
+  }, [user?.email, checkExistingRegistration, event.id])
   useEffect(() => {
     checkRegistration()
-  }, [event.id, user?.email])
+  }, [checkRegistration, event.id, user?.email])
 
   const handleQuantityChange = (ticketId: string, change: number) => {
     setTicketSelections(prev => {
@@ -56,12 +58,8 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
     )
   }
 
-  const onSubmit = async () => {
-    if (
-      Object.keys(ticketSelections).length === 0 ||
-      !user?.email ||
-      !user?.name
-    ) {
+  const onSubmit = async (name: string, email: string) => {
+    if (Object.keys(ticketSelections).length === 0) {
       showToast('Please select at least one ticket and log in to continue.')
       return
     }
@@ -70,8 +68,8 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
       const result = await createRegistration.mutateAsync({
         eventId: event.id,
         registrationData: {
-          email: user.email,
-          name: user.name,
+          email,
+          name,
           tickets: ticketSelections
         }
       })
@@ -84,8 +82,6 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
         } else {
           setCurrentRegistrationId(result.registration.id)
         }
-      } else {
-        showToast(result.error, { type: 'error' })
       }
     } catch (error) {
       errorHandler(error)

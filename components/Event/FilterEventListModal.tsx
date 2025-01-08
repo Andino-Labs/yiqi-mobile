@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { View, TextInput, Text, Pressable } from 'react-native'
-import { Modal } from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
 import { Ionicons } from '@expo/vector-icons'
 import DateTimePicker, {
   DateTimePickerEvent
 } from '@react-native-community/datetimepicker'
 import { SearchFilterType } from '@/app/(tabs)/events'
 import { EventTypeEnum } from '@/types/eventTypes'
-import { Select } from '../Select'
+import { Select } from '../ui/Select'
 import { useTranslation } from 'react-i18next'
 
 interface FilterEventsProps {
@@ -40,6 +40,7 @@ export default function FilterEventListModal({
     ) {
       setLocalFilters(searchFilters)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchFilters])
 
   const onDateChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {

@@ -2,6 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'expo-router'
 import trpc from '@/constants/trpc'
 import { SearchFilterType } from '@/app/(tabs)/events'
+import { useQueryClient } from '@tanstack/react-query'
+import { getQueryKey } from '@trpc/react-query'
+import { errorHandler } from '@/helpers/errorHandler'
 
 export const useEventList = () => {
   const router = useRouter()
@@ -15,31 +18,53 @@ export const useEventList = () => {
   const [page, setPage] = useState(1)
   const [events, setEvents] = useState<any[]>([])
 
-  const { data, refetch, isFetching, isLoading } =
-    trpc.getPublicEvents.useQuery(
-      { ...searchFilters, page, limit: 8 },
-      { enabled: false }
-    )
-
+  // Fetch events with filters, pagination
+  const { data, refetch, isFetching, isLoading, isInitialLoading } =
+    trpc.getPublicEvents.useQuery({ ...searchFilters, page, limit: 8 })
+  // Prefetch event details
+  const queryClient = useQueryClient()
+  const fetchEventDetails = trpc.getEvent.useQuery(
+    { includeTickets: true, eventId: '' },
+    { enabled: false }
+  )
+  // Handle event press with prefetching event details
   const onEventPress = useCallback(
-    (eventId: string) => {
-      router.push({
-        pathname: '/eventDetails/[eventId]',
-        params: { eventId }
-      })
+    async (eventId: string) => {
+      try {
+        const queryKey = getQueryKey(trpc.getEvent, {
+          eventId,
+          includeTickets: true
+        })
+
+        await queryClient.prefetchQuery(
+          queryKey,
+          () => fetchEventDetails.refetch
+        )
+
+        // Navigate to event details
+        router.push({
+          pathname: '/eventDetails/[eventId]',
+          params: { eventId }
+        })
+      } catch (error) {
+        errorHandler(error)
+      }
     },
-    [router]
+    [fetchEventDetails.refetch, queryClient, router]
   )
 
+  // Open and close modal handlers
   const openModal = useCallback(() => setModalVisible(true), [])
   const closeModal = useCallback(() => setModalVisible(false), [])
 
+  // Apply filters and reset pagination
   const applyFilters = useCallback(() => {
-    setPage(1)
-    refetch()
+    setPage(1) // Reset pagination
+    refetch() // Refetch with updated filters
     closeModal()
-  }, [closeModal, refetch])
+  }, [refetch, closeModal])
 
+  // Reset filters and apply changes
   const handleResetFilters = useCallback(() => {
     setSearchFilters({
       title: '',
@@ -49,24 +74,21 @@ export const useEventList = () => {
     applyFilters()
   }, [applyFilters])
 
+  // Update events when data changes
   useEffect(() => {
-    refetch()
-  }, [searchFilters, page, refetch])
-
-  useEffect(() => {
-    if (data) {
-      if (page === 1) {
-        setEvents(data.events)
-      } else {
-        setEvents(prevEvents => [...prevEvents, ...data.events])
-      }
+    if (data?.events) {
+      setEvents(prevEvents =>
+        page === 1 ? data.events : [...prevEvents, ...data.events]
+      )
     }
-  }, [data, page])
+  }, [data?.events, page])
 
+  // Load more data for infinite scroll
   const loadMoreData = useCallback(() => {
-    if (events.length >= data?.totalCount! || isLoading || isFetching) return
+    if (events.length >= (data?.totalCount ?? 0) || isLoading || isFetching)
+      return
     setPage(prevPage => prevPage + 1)
-  }, [events, data?.totalCount, isLoading])
+  }, [events.length, data?.totalCount, isLoading, isFetching])
 
   return {
     loadMoreData,
@@ -76,6 +98,7 @@ export const useEventList = () => {
     searchFilters,
     onEventPress,
     isLoading,
+    isInitialLoading,
     applyFilters,
     closeModal,
     openModal,
