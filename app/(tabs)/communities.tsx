@@ -66,8 +66,8 @@ export default function Communities() {
     })
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
-      <View className="flex-row items-center justify-between p-2">
+    <SafeAreaView edges={['top']} className="flex-1">
+      <View className="flex-row items-center justify-between p-2 mb-2">
         {/* Back Arrow */}
         <Pressable onPress={() => router.back()}>
           <ChevronLeft color="white" size={24} />
@@ -78,7 +78,7 @@ export default function Communities() {
         </Text>
         <View />
       </View>
-      <View className="flex-1 m-2">
+      <View className="flex-1 mx-2">
         <FlashList
           data={communities}
           renderItem={({ item }) => (
@@ -90,6 +90,7 @@ export default function Communities() {
           onEndReached={loadMoreData}
           onEndReachedThreshold={0.8}
           estimatedItemSize={250}
+          showsVerticalScrollIndicator={false}
           ListFooterComponent={renderFooter}
           numColumns={2}
           keyExtractor={(item, index) => item.id + index.toString()}

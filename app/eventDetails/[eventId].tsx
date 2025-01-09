@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   View,
   Text,
@@ -44,7 +45,7 @@ export default function EventDetails() {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-black justify-center items-center">
+      <SafeAreaView className="flex-1 justify-center items-center">
         <ActivityIndicator
           className=" py-2"
           size="large"
@@ -56,7 +57,7 @@ export default function EventDetails() {
 
   if (error) {
     return (
-      <SafeAreaView className="flex-1 bg-black justify-center items-center">
+      <SafeAreaView className="flex-1 justify-center items-center">
         <Text className="text-red-500">Failed to load event details.</Text>
       </SafeAreaView>
     )
@@ -67,6 +68,7 @@ export default function EventDetails() {
       <Stack.Screen
         options={{
           title: data?.title || '',
+          headerBackTitleVisible: false,
           headerLeft: () => (
             <Pressable onPress={() => router.back()}>
               <ChevronLeft color="white" size={24} />
@@ -74,7 +76,7 @@ export default function EventDetails() {
           )
         }}
       />
-      <SafeAreaView className="flex-1 bg-black px-5 py-2">
+      <SafeAreaView className="flex-1 px-5 py-2">
         {/* Event Image */}
         {data?.openGraphImage && (
           <View className="mb-5">
@@ -108,7 +110,7 @@ export default function EventDetails() {
           </View>
           <View className="flex-row">
             {data.location && data.city && (
-              <>
+              <React.Fragment>
                 <MaterialIcons
                   name="location-on"
                   size={18}
@@ -118,7 +120,7 @@ export default function EventDetails() {
                 <Text numberOfLines={1} className="text-white text-sm">
                   {data.location}, {data.city}
                 </Text>
-              </>
+              </React.Fragment>
             )}
           </View>
         </View>

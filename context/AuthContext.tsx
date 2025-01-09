@@ -25,7 +25,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const configGoogleSignIn = () => {
     GoogleSignin.configure({
       offlineAccess: false,
-      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID
+      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+      iosClientId:
+        'com.googleusercontent.apps.837954574689-a4bl8tp4i2jjgcvsmq0lunqsg30tgh9n'
     })
   }
 

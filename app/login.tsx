@@ -51,7 +51,7 @@ export default function Login() {
   }) => (
     <TouchableOpacity
       onPress={onPress}
-      className="bg-black py-3 rounded-md flex-row justify-center items-center mb-4"
+      className="py-3 rounded-md flex-row justify-center items-center mb-4"
     >
       <Icon />
       <ThemedText className="font-medium text-white ml-2">{text}</ThemedText>
@@ -60,7 +60,7 @@ export default function Login() {
   const { t } = useTranslation()
   const router = useRouter()
   return (
-    <SafeAreaView className="bg-black flex-1 justify-center items-center px-5">
+    <SafeAreaView className="flex-1 justify-center items-center px-5">
       <ThemedView
         className="bg-neutral-900 border-r-4"
         style={{ borderRadius: 10, padding: 10 }}

@@ -75,19 +75,22 @@ export default function FeaturedEventList({ events }: FeaturedEventListProps) {
       </ThemedView>
 
       {/* Make sure the FlashList has a valid size */}
-      <FlashList
-        data={events}
-        horizontal
-        keyExtractor={keyExtractor}
-        contentContainerStyle={styles.listContainer}
-        alwaysBounceHorizontal
-        estimatedItemSize={300}
-        estimatedListSize={{
-          height: 300,
-          width: 220
-        }}
-        renderItem={renderItem}
-      />
+      {events && (
+        <FlashList
+          data={events}
+          horizontal
+          keyExtractor={keyExtractor}
+          contentContainerStyle={styles.listContainer}
+          alwaysBounceHorizontal
+          showsHorizontalScrollIndicator={false}
+          estimatedItemSize={300}
+          estimatedListSize={{
+            height: 300,
+            width: 220
+          }}
+          renderItem={renderItem}
+        />
+      )}
     </>
   )
 }

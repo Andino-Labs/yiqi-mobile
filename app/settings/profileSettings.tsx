@@ -13,7 +13,11 @@ export default function ProfileSettings() {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView className="flex-1">
         <Stack.Screen
-          options={{ headerShown: true, title: 'Profile Settings' }}
+          options={{
+            headerShown: true,
+            headerBackTitleVisible: false,
+            title: 'Profile Settings'
+          }}
         />
 
         {data && (
