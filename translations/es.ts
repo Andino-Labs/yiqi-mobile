@@ -16,8 +16,9 @@ export default {
     apply: 'Aplicar',
     showMore: 'Mostrar más',
     login: 'Iniciar sesión',
-    confirm: 'Eliminar',
-    cancel: 'Cancelar'
+    delete: 'Eliminar',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar'
   },
   loginScreen: {
     welcome: 'Bienvenido a Yiqi',
@@ -149,6 +150,7 @@ export default {
   profile: {
     profileSettings: 'Configuración de perfil',
     networking: 'Networking',
+    organizations: 'Organizations',
     language: 'Idioma',
     support: 'Soporte',
     privacyPolicy: 'Política de privacidad',
@@ -182,7 +184,7 @@ export default {
     tellUsAboutYourself: 'Cuéntanos sobre ti',
     setToPublic: 'Establecer como público',
     User: 'Usuario',
-    profileSettings: 'Configuración del Perfil',
+    screenTitle: 'Configuración del Perfil',
     enterYourX: 'Introduce tu link de x',
     enterInstagramURL: 'Introduce tu link de Instagram',
     enterWebsiteURL: 'Introduce tu link de sitio web',
@@ -286,5 +288,28 @@ export default {
         }
       }
     }
+  },
+  organization: {
+    registrationList: {
+      organizationEvents: 'Eventos de la organización',
+      screenTitle: 'Registros',
+      searchByName: 'Buscar',
+      scanButtonLabel: 'Escanear',
+      checkinSuccessToast: '¡Confirmado!',
+      checkinErrorToast: 'Error. Intenta de nuevo.',
+      scanErrorToast: 'QR inválido',
+      confirmModalTitle: 'Confirmar entrada',
+      confirmModalDescription: '¿Confirmar este boleto?',
+      name: 'Nombre',
+      category: 'Categoría',
+      price: 'Precio',
+      checkedIn: 'Confirmado',
+      checkIn: 'Confirmar'
+    }
+  },
+  onBoarding: {
+    step1: 'Detalles personales',
+    step2: 'Detalles profesionales',
+    step3: 'Red mejorada'
   }
 }

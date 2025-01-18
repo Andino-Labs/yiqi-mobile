@@ -53,14 +53,14 @@ export default function ViewTicketModal({
   return (
     <Modal onPressOverlay={closeModal} isOpen={isOpen} onDismiss={closeModal}>
       <View
-        className="bg-neutral-950 m-4 p-4 rounded-lg"
+        className="bg-neutral-900 m-4 p-4 rounded-lg"
         style={{ minWidth: '80%' }}
       >
         <Text className="text-lg font-bold text-white mb-4 text-center">
           {eventTitle}
         </Text>
         <View className="items-center my-5">
-          <QRCode size={250} value={qrData} />
+          <QRCode quietZone={15} size={250} value={qrData} />
         </View>
         {ticketInfo.map((ticket, index) => (
           <LabelValue key={index} label={ticket.label} value={ticket.value} />

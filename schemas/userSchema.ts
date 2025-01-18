@@ -9,7 +9,8 @@ export const userSchema = z.object({
   email: z.string(),
   emailVerified: z.date().nullable().optional(),
   picture: z.string().nullable(),
-  phoneNumber: z.string().nullable().optional()
+  phoneNumber: z.string().nullable().optional(),
+  role: z.string()
 })
 
 export const userDataCollectedShema = z.object({
@@ -80,7 +81,7 @@ export const profileWithPrivacySchema = baseProfileSchema.extend({
   id: z.string(),
   picture: z.string().nullable().optional(),
   privacySettings: privacySettingsSchema,
-  linkedinAccessToken: z.string().optional(),
+  linkedinAccessToken: z.string().nullable().optional(),
   isLinkedinLinked: z.boolean().default(false),
   role: z.string()
 })

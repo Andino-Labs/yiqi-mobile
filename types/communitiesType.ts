@@ -1,12 +1,9 @@
 export type CommunitiesType = {
   name: string
   id: string
-  description: string | null
-  createdAt: Date
-  updatedAt: Date
+  description?: string | null
   colour: string | null
-  logo: string | null
-  stripeAccountId: string | null
+  logo?: string | null
   linkedin?: string | null | undefined
   instagram?: string | null | undefined
   website?: string | null | undefined

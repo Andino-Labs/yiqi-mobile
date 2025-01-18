@@ -24,7 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: 'com.andinolabs.yiqi',
-    versionCode: 6,
+    versionCode: 8,
 
     softwareKeyboardLayoutMode: 'pan',
     adaptiveIcon: {
@@ -58,6 +58,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           './assets/fonts/GeistMonoVF.woff',
           './assets/fonts/GeistVF.woff'
         ]
+      }
+    ],
+    [
+      'expo-camera',
+      {
+        cameraPermission: 'Allow $(PRODUCT_NAME) to access your camera',
+        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone',
+        recordAudioAndroid: true
       }
     ]
   ],

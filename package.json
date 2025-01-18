@@ -75,7 +75,8 @@
     "react-native-svg": "^15.2.0",
     "react-native-uuid": "^2.0.3",
     "react-native-webview": "13.8.6",
-    "superjson": "^2.2.1"
+    "superjson": "^2.2.1",
+    "expo-camera": "~15.0.16"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

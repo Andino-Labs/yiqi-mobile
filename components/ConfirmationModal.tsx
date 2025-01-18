@@ -25,7 +25,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   }
 
   return (
-    <AppBottomSheet ref={bottomSheetRef}>
+    <AppBottomSheet name="ConfirmationModal" ref={bottomSheetRef}>
       <BottomSheetView style={{ paddingHorizontal: 10, paddingBottom: 10 }}>
         <Text className="text-lg font-bold text-white mb-2">{title}</Text>
         {description && (

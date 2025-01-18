@@ -5,10 +5,11 @@ import { ScrollView } from 'react-native'
 import { profileWithPrivacySchema } from '@/schemas/userSchema'
 import UpdateProfileForm from '@/components/Profile/UpdateProfileForm'
 import trpc from '@/constants/trpc'
+import { useTranslation } from 'react-i18next'
 
 export default function ProfileSettings() {
   const { data } = trpc.getUserProfile.useQuery()
-
+  const { t } = useTranslation()
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView className="flex-1">
@@ -16,7 +17,7 @@ export default function ProfileSettings() {
           options={{
             headerShown: true,
             headerBackTitleVisible: false,
-            title: 'Profile Settings'
+            title: t('profileSettings.screenTitle')
           }}
         />
 

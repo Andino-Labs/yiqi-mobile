@@ -53,7 +53,10 @@ export default function UpdateProfileForm({
     defaultValues: { ...user }
   })
 
-  const updateUserProfile = trpc.updateUserProfile.useMutation()
+  const utils = trpc.useUtils()
+  const updateUserProfile = trpc.updateUserProfile.useMutation({
+    onSuccess: () => utils.getUserProfile.invalidate()
+  })
   const deleteUserAccount = trpc.deleteUserAccount.useMutation()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [file, setFile] = useState<ImagePickerAsset | undefined>()
