@@ -304,7 +304,12 @@ export default {
       category: 'Categoría',
       price: 'Precio',
       checkedIn: 'Confirmado',
-      checkIn: 'Confirmar'
+      checkIn: 'Confirmar',
+      camera: {
+        requestingPermession: 'Solicitando permisos de cámara',
+        cameraNotGranted: 'Necesitamos tu permiso para mostrar la cámara.',
+        grantPermession: 'Conceder permiso'
+      }
     }
   },
   onBoarding: {

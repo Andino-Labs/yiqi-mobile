@@ -19,6 +19,7 @@ import {
 } from 'expo-camera'
 import { ThemedText } from '@/components/ui/ThemedText'
 import { Colors } from '@/constants/Colors'
+import { useTranslation } from 'react-i18next'
 
 type QrCameraModalProps = {
   handleBarCodeScanned: (scanningResult: BarcodeScanningResult) => void
@@ -30,7 +31,7 @@ const QrCameraModal: React.FC<QrCameraModalProps> = ({
   bottomSheetRef
 }) => {
   const [permission, requestPermission] = useCameraPermissions()
-
+  const { t } = useTranslation()
   return (
     <AppBottomSheet
       stackBehavior="replace"
@@ -46,20 +47,22 @@ const QrCameraModal: React.FC<QrCameraModalProps> = ({
         {!permission ? (
           <View className="flex-1 justify-center items-center">
             <ThemedText className="text-center text-white mb-8">
-              Requesting camera permissions ...
+              {t('organization.registrationList.camera.requestingPermession')}
             </ThemedText>
             <ActivityIndicator color={Colors.dark.tint} />
           </View>
         ) : !permission.granted ? (
           <View className="flex-1 justify-center items-center">
             <ThemedText className="text-center text-red-400 mb-8">
-              We need your permission to show the camera.
+              {t('organization.registrationList.camera.cameraNotGranted')}
             </ThemedText>
             <Pressable
               className="bg-neutral-800 p-3 rounded-lg"
               onPress={requestPermission}
             >
-              <ThemedText>Grant permission</ThemedText>
+              <ThemedText>
+                {t('organization.registrationList.camera.grantPermession')}
+              </ThemedText>
             </Pressable>
           </View>
         ) : (

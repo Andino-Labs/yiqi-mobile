@@ -300,7 +300,12 @@ export default {
       category: 'Category',
       price: 'Price',
       checkedIn: 'Checked in',
-      checkIn: 'Check In'
+      checkIn: 'Check In',
+      camera: {
+        requestingPermession: 'Requesting camera permissions',
+        cameraNotGranted: 'We need your permission to show the camera.',
+        grantPermession: 'Grant permission'
+      }
     }
   },
   onBoarding: {

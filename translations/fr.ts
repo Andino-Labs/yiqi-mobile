@@ -246,7 +246,13 @@ export default {
       category: 'Categoria',
       price: 'Preço',
       checkedIn: 'Confirmado',
-      checkIn: 'Confirmar'
+      checkIn: 'Confirmar',
+      camera: {
+        requestingPermession: "Demande d'autorisations pour la caméra",
+        cameraNotGranted:
+          'Nous avons besoin de votre permission pour afficher la caméra.',
+        grantPermession: 'Accorder la permission'
+      }
     }
   },
   onBoarding: {
