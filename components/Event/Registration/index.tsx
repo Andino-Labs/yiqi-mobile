@@ -104,7 +104,7 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
                 <Ionicons name="add-circle-outline" size={24} color="white" />
               </TouchableOpacity>
             </View>
-            <Text className="text-white font-bold ml-2">${ticket.price}</Text>
+            <Text className="text-white font-bold ml-2">S/{ticket.price}</Text>
           </View>
         ))}
 

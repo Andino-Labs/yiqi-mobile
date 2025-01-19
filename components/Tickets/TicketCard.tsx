@@ -1,11 +1,19 @@
 import React from 'react'
-import { View, Text, StyleProp, ViewStyle, Pressable } from 'react-native'
+import {
+  View,
+  Text,
+  StyleProp,
+  ViewStyle,
+  Pressable,
+  TouchableOpacity
+} from 'react-native'
 import { Building2, ImageOff, Ticket } from 'lucide-react-native'
 import { Image } from 'expo-image'
 import { useTranslation } from 'react-i18next'
 import TicketStatusBadge from './TicketBadge'
 import { TicketDetails } from '@/app/(tabs)/tickets'
 import { ticketEventSchemaType } from '@/schemas/ticketSchema'
+import DashedView from '../TicketDashedLine'
 
 const TicketCard: React.FC<{
   ticketDetails: ticketEventSchemaType
@@ -68,7 +76,8 @@ const TicketCard: React.FC<{
 
       {/* Ticket Info */}
       {tickets.map((ticket, index) => (
-        <View key={ticket.id} className="border-t-neutral-800 border-t-2">
+        <View key={ticket.id}>
+          <DashedView />
           <View className="px-4 py-2  flex-row justify-between items-center">
             <View className="bg-gray-700 px-2 py-1 rounded">
               <Text className="text-white font-semibold text-xs">
@@ -81,7 +90,7 @@ const TicketCard: React.FC<{
 
           {/* Button */}
           <View className="px-4 pb-2">
-            <Pressable
+            <TouchableOpacity
               disabled={['PENDING', 'REJECTED'].includes(ticket.status)}
               onPress={() =>
                 onTicketPress({
@@ -113,7 +122,7 @@ const TicketCard: React.FC<{
               >
                 {t('tickets.ticketLabelView')}
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       ))}

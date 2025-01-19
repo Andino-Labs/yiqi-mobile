@@ -24,7 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: 'com.andinolabs.yiqi',
-    versionCode: 8,
+    versionCode: 9,
 
     softwareKeyboardLayoutMode: 'pan',
     adaptiveIcon: {

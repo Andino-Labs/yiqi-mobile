@@ -10,4 +10,5 @@ export type CommunitiesType = {
   userId?: string | null | undefined
   facebook?: string | null | undefined
   tiktok?: string | null | undefined
+  eventCount?: number
 }

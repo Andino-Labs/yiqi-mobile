@@ -5,13 +5,7 @@ import trpc from '@/constants/trpc'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import InputField from '@/components/formsFields/InputField'
 import ImagePickerComponent from '@/components/formsFields/ImagePickerComponent'
-import {
-  Pressable,
-  ScrollView,
-  View,
-  ActivityIndicator,
-  Text
-} from 'react-native'
+import { ScrollView, View } from 'react-native'
 import {
   User,
   Mail,
@@ -35,11 +29,11 @@ import { UploadToS3 } from '@/helpers/uploadToS3'
 import { ImagePickerAsset } from 'expo-image-picker'
 import ConfirmationModal from '../ConfirmationModal'
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
-import { Colors } from '@/constants/Colors'
 import { useAuthContext } from '@/context/AuthContext'
 import { router } from 'expo-router'
 import showToast from '@/helpers/showToast'
 import PrivacySwitch from './PrivacySwitchComponent'
+import { ThemedButton } from '../ui/ThemedButton'
 
 const IconProps = { color: '#fff', size: 20 }
 
@@ -174,27 +168,19 @@ export default function UpdateProfileForm({
             placeholder={t('profileSettings.enterWebsiteURL')}
             name="website"
           />
-          <Pressable
+
+          <ThemedButton
+            text={t('profileSettings.deleteModal.title')}
             onPress={() => deleteModalRef.current?.present()}
-            className={`bg-red-700 py-3 rounded-lg items-center mt-2`}
-          >
-            <Text className="font-bold  text-white">
-              {t('profileSettings.deleteModal.title')}
-            </Text>
-          </Pressable>
-          <Pressable
+            isLoading={isLoading}
+            className={`bg-red-700 border-red-700`}
+          />
+          <ThemedButton
+            text={t('profileSettings.saveChanges')}
             onPress={form.handleSubmit(onSubmit)}
-            disabled={isLoading}
-            className={`border-neutral-200 border-[1px] py-3 rounded-lg items-center mt-6`}
-          >
-            {isLoading ? (
-              <ActivityIndicator size="small" color={Colors.dark.tint} />
-            ) : (
-              <Text className="font-bold text-white">
-                {t('profileSettings.saveChanges')}
-              </Text>
-            )}
-          </Pressable>
+            isLoading={isLoading}
+            className={`mt-4`}
+          />
         </View>
         <ConfirmationModal
           bottomSheetRef={deleteModalRef}

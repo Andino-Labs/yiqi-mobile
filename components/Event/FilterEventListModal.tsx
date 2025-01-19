@@ -9,6 +9,7 @@ import { SearchFilterType } from '@/app/(tabs)/events'
 import { EventTypeEnum } from '@/types/eventTypes'
 import { Select } from '../ui/Select'
 import { useTranslation } from 'react-i18next'
+import { ThemedButton } from '../ui/ThemedButton'
 
 interface FilterEventsProps {
   searchFilters: SearchFilterType
@@ -123,20 +124,17 @@ export default function FilterEventListModal({
           />
 
           <View className="flex-row justify-between mt-4">
-            <Pressable
-              className="border border-neutral-700 rounded-md p-2"
+            <ThemedButton
+              className="border border-red-700 rounded-md p-2"
+              textClassName="text-red-500"
               onPress={handleResetFilters}
-            >
-              <Text className="text-neutral-400 font-bold">
-                {t('general.reset')}
-              </Text>
-            </Pressable>
-            <Pressable
-              className="border border-neutral-700 rounded-md p-2"
+              text={t('general.reset')}
+            />
+            <ThemedButton
+              className="p-2"
               onPress={handleApplyFilters}
-            >
-              <Text className="text-white font-bold">{t('general.apply')}</Text>
-            </Pressable>
+              text={t('general.apply')}
+            />
           </View>
         </View>
       </Modal>

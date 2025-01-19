@@ -32,7 +32,7 @@ export default function RegistrationSummary({
               <Text className="text-base text-white">
                 {ticket.price === 0
                   ? t('Registration.eventFree')
-                  : `$${(ticket.price * quantity).toFixed(2)}`}
+                  : `S/${(ticket.price * quantity).toFixed(2)}`}
               </Text>
             </View>
           )
@@ -42,7 +42,7 @@ export default function RegistrationSummary({
             {t('Registration.eventTotal')}
           </Text>
           <Text className="text-base font-bold text-white">
-            ${calculateTotal().toFixed(2)}
+            S/{calculateTotal().toFixed(2)}
           </Text>
         </View>
       </View>

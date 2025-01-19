@@ -9,7 +9,6 @@ import {
 } from 'lucide-react-native'
 import { PublicEventType } from '@/types/eventTypes'
 import { Image } from 'expo-image'
-import { useTranslation } from 'react-i18next'
 
 const EventCard: React.FC<{
   event: PublicEventType
@@ -37,7 +36,6 @@ const EventCard: React.FC<{
     minute: 'numeric',
     hour12: true
   })
-  const { t } = useTranslation()
 
   return (
     <Pressable
@@ -95,9 +93,7 @@ const EventCard: React.FC<{
 
           <View className="flex-row items-center">
             <Users size={16} color="white" />
-            <Text className="text-gray-300 text-sm ml-2">
-              {registrations} {t('general.going')}
-            </Text>
+            <Text className="text-gray-300 text-sm ml-2">{registrations}</Text>
           </View>
         </View>
       </View>

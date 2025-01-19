@@ -3,15 +3,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import trpc from '@/constants/trpc'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import InputField from '@/components/formsFields/InputField'
-import { ActivityIndicator, Pressable, View } from 'react-native'
+import { View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { UserDataCollected, userDataCollectedShema } from '@/schemas/userSchema'
 import { UploadToS3 } from '@/helpers/uploadToS3'
 import { DocumentPickerAsset } from 'expo-document-picker'
 import ResumePickerComponent from '../ResumePickerComponent'
 import { ThemedText } from '../ui/ThemedText'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import showToast from '@/helpers/showToast'
+import { ThemedButton } from '../ui/ThemedButton'
 
 type NetworkingData = Pick<
   UserDataCollected,
@@ -146,19 +146,13 @@ export default function UpdateNetworkingForm({
           textarea
           placeholder={t('networkingSettings.significantChallengePlaceholder')}
         />
-        <Pressable
+
+        <ThemedButton
+          text={t('networkingSettings.saveNetworkingProfile')}
           onPress={form.handleSubmit(onSubmit)}
-          disabled={isLoading}
-          className={`border-neutral-200 border-[1px] py-3 rounded-lg items-center mb-6`}
-        >
-          {isLoading ? (
-            <ActivityIndicator size="small" color={Colors.dark.tint} />
-          ) : (
-            <ThemedText className="font-bold text-white">
-              {t('networkingSettings.saveNetworkingProfile')}
-            </ThemedText>
-          )}
-        </Pressable>
+          isLoading={isLoading}
+          className={`mb-6`}
+        />
       </View>
     </FormProvider>
   )

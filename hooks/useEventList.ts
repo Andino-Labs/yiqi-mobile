@@ -2,13 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'expo-router'
 import trpc from '@/constants/trpc'
 import { SearchFilterType } from '@/app/(tabs)/events'
-import { useQueryClient } from '@tanstack/react-query'
-import { getQueryKey } from '@trpc/react-query'
-import { errorHandler } from '@/helpers/errorHandler'
 
 export const useEventList = () => {
   const router = useRouter()
-
   const [modalVisible, setModalVisible] = useState(false)
   const [searchFilters, setSearchFilters] = useState<SearchFilterType>({
     title: '',
@@ -18,42 +14,49 @@ export const useEventList = () => {
   const [page, setPage] = useState(1)
   const [events, setEvents] = useState<any[]>([])
 
-  // Fetch events with filters, pagination
+  // Fetch events with filters and pagination
   const { data, refetch, isFetching, isLoading, isInitialLoading } =
     trpc.getPublicEvents.useQuery({ ...searchFilters, page, limit: 8 })
-  // Prefetch event details
-  const queryClient = useQueryClient()
-  const fetchEventDetails = trpc.getEvent.useQuery(
-    { includeTickets: true, eventId: '' },
-    { enabled: false }
-  )
-  // Handle event press with prefetching event details
+
+  const utils = trpc.useUtils()
+
+  // Prefetch event details for visible events
+  useEffect(() => {
+    const newEventIds = data?.events
+      ?.filter(
+        event =>
+          !utils.getEvent.getData({ eventId: event.id, includeTickets: true })
+      )
+      .map(event => event.id)
+
+    newEventIds?.forEach(eventId =>
+      utils.getEvent.prefetch({ eventId, includeTickets: true })
+    )
+  }, [data?.events, utils])
+
+  // Handle event press with cache check
   const onEventPress = useCallback(
     async (eventId: string) => {
-      try {
-        const queryKey = getQueryKey(trpc.getEvent, {
-          eventId,
-          includeTickets: true
-        })
-
-        await queryClient.prefetchQuery(
-          queryKey,
-          () => fetchEventDetails.refetch
-        )
-
-        // Navigate to event details
-        router.push({
-          pathname: '/eventDetails/[eventId]',
-          params: { eventId }
-        })
-      } catch (error) {
-        errorHandler(error)
+      const cachedEvent = utils.getEvent.getData({
+        eventId,
+        includeTickets: true
+      })
+      if (!cachedEvent) {
+        try {
+          await utils.getEvent.prefetch({ eventId, includeTickets: true })
+        } catch (err) {
+          console.error('Prefetch failed:', err)
+        }
       }
+      router.push({
+        pathname: '/eventDetails/[eventId]',
+        params: { eventId }
+      })
     },
-    [fetchEventDetails.refetch, queryClient, router]
+    [router, utils]
   )
 
-  // Open and close modal handlers
+  // Modal visibility handlers
   const openModal = useCallback(() => setModalVisible(true), [])
   const closeModal = useCallback(() => setModalVisible(false), [])
 

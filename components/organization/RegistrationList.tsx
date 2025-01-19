@@ -5,6 +5,8 @@ import { ThemedText } from '@/components/ui/ThemedText'
 import { RegistrationType } from '@/types/RegistrationType'
 import { CheckCircle } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
+import TicketDashedLine from '../TicketDashedLine'
+
 interface TicketInfo {
   label: string
   value?: string
@@ -23,6 +25,8 @@ export default function RegistrationList({
   onCheckInPress: (ticketId: string) => void
 }) {
   const { t } = useTranslation()
+  console.log(registrations)
+
   return (
     <Animated.ScrollView>
       {registrations.map((registration, index) =>
@@ -32,34 +36,47 @@ export default function RegistrationList({
             entering={FadeIn.delay(index * 50)}
             exiting={FadeOut}
             className={`rounded-md ${
-              ticket.checkedInDate ? 'border-green-500' : 'border-neutral-600'
-            } border border-dashed bg-neutral-800 p-4 mb-3`}
+              ticket.checkedInDate ? 'bg-green-900' : 'bg-neutral-800'
+            } border border-dashed  mb-3`}
           >
-            <ThemedText className="text-white text-lg mb-2 flex-row justify-center items-center">
-              {registration.user.name}
-            </ThemedText>
-            <LabelValue
-              label={t('organization.registrationList.name')}
-              value={ticket.ticketType?.name}
-            />
-            <LabelValue
-              label={t('organization.registrationList.category')}
-              value={ticket.ticketType?.category}
-            />
-            <LabelValue
-              label={t('organization.registrationList.price')}
-              value={String(ticket.ticketType?.price || 0)}
-            />
-            <View />
-            {ticket.checkedInDate ? (
+            <View className="p-2">
               <LabelValue
-                label={t('organization.registrationList.checkedIn')}
-                value={ticket.checkedInDate.toLocaleString()}
+                label={t('Registration.eventFormName')}
+                value={registration.user.name}
               />
+              <LabelValue
+                label={t('Registration.eventFormEmail')}
+                value={registration.user.email}
+              />
+            </View>
+            <TicketDashedLine />
+            <View className="p-2">
+              <LabelValue
+                label={t('organization.registrationList.name')}
+                value={ticket.ticketType?.name}
+              />
+              <LabelValue
+                label={t('organization.registrationList.category')}
+                value={ticket.ticketType?.category}
+              />
+              <LabelValue
+                label={t('organization.registrationList.price')}
+                value={String(ticket.ticketType?.price || 0)}
+              />
+            </View>
+            <TicketDashedLine />
+
+            {ticket.checkedInDate ? (
+              <View className="m-2">
+                <LabelValue
+                  label={t('organization.registrationList.checkedIn')}
+                  value={ticket.checkedInDate.toLocaleString()}
+                />
+              </View>
             ) : (
               <Pressable
                 onPress={() => onCheckInPress(ticket.id)}
-                className="flex-row items-center justify-center py-2 mt-3 rounded-md border border-neutral-800 bg-neutral-900"
+                className="flex-row items-center justify-center py-2 m-3 rounded-md border border-neutral-800 bg-neutral-900"
               >
                 <CheckCircle color="white" className="mr-1" />
                 <ThemedText className="text-center text-white">
