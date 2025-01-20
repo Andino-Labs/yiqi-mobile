@@ -11,6 +11,7 @@ import StepThree from '@/components/onBoarding/StepThree'
 import { ArrowLeft, X } from 'lucide-react-native'
 import ProgressBar from '@/components/onBoarding/ProgressBar'
 import { router } from 'expo-router'
+import { useTranslation } from 'react-i18next'
 
 const { width } = Dimensions.get('window')
 
@@ -19,11 +20,11 @@ const OnBoarding = () => {
   const progress = useSharedValue(0)
   const pagerRef = useRef<PagerView>(null)
   const { data } = trpc.getUserProfile.useQuery()
-
+  const { t } = useTranslation()
   const steps = [
-    'Personal Details',
-    'Professional Details',
-    'Enhanced Networking'
+    t('onBoarding.step1'),
+    t('onBoarding.step2'),
+    t('onBoarding.step3')
   ]
   const progressBarWidth = width - 32
 
@@ -70,7 +71,7 @@ const OnBoarding = () => {
         <ThemedText className="text-lg font-semibold text-center">
           {steps[currentStep]}
         </ThemedText>
-        <Pressable onPress={() => router.back()}>
+        <Pressable onPress={() => router.navigate('/(tabs)/')}>
           <X color="white" />
         </Pressable>
       </View>

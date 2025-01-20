@@ -59,10 +59,9 @@ export default function Events() {
     ({ item }) => <EventListCard onEventPress={onEventPress} event={item} />,
     [onEventPress]
   )
-
   return (
-    <SafeAreaView className="flex-grow bg-black">
-      <View className="flex-row items-center justify-between p-2">
+    <SafeAreaView edges={['top']} className="flex-1">
+      <View className="flex-row items-center justify-between p-2 mb-2">
         <Pressable onPress={() => router.back()}>
           <ChevronLeft color="white" size={24} />
         </Pressable>
@@ -75,7 +74,7 @@ export default function Events() {
         </Pressable>
       </View>
 
-      <View className="flex-1 m-2">
+      <View className="flex-1 mx-2">
         <FlashList
           data={events}
           renderItem={renderItem}

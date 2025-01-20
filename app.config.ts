@@ -24,7 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: 'com.andinolabs.yiqi',
-    versionCode: 6,
+    versionCode: 9,
 
     softwareKeyboardLayoutMode: 'pan',
     adaptiveIcon: {
@@ -46,7 +46,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       '@react-native-google-signin/google-signin',
       {
-        iosUrlScheme: process.env.GOOGLE_WEB_CLIENT
+        iosUrlScheme: process.env.GOOGLE_IOS_CLIENT_ID
       }
     ],
     'expo-secure-store',
@@ -58,6 +58,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           './assets/fonts/GeistMonoVF.woff',
           './assets/fonts/GeistVF.woff'
         ]
+      }
+    ],
+    [
+      'expo-camera',
+      {
+        cameraPermission: 'Allow $(PRODUCT_NAME) to access your camera',
+        microphonePermission: 'Allow $(PRODUCT_NAME) to access your microphone',
+        recordAudioAndroid: true
       }
     ]
   ],

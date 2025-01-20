@@ -16,7 +16,8 @@ export function useAuth() {
   const configGoogleSignIn = () => {
     GoogleSignin.configure({
       offlineAccess: false,
-      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID
+      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+      iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID
     })
   }
 

@@ -17,7 +17,8 @@ export default {
     showMore: 'Show all',
     login: 'Log in',
     delete: 'Delete',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    confirm: 'Confirm'
   },
   loginScreen: {
     welcome: 'Welcome to Yiqi',
@@ -146,6 +147,7 @@ export default {
   profile: {
     profileSettings: 'Profile Settings',
     networking: 'Networking',
+    organizations: 'Organizations',
     language: 'Language',
     support: 'Support',
     privacyPolicy: 'Privacy & Policy',
@@ -178,7 +180,7 @@ export default {
     tellUsAboutYourself: 'Tell us about yourself',
     setToPublic: 'Set to Public',
     User: 'User',
-    profileSettings: 'Profile Settings',
+    screenTitle: 'Profile Settings',
     enterYourX: 'Enter your X URL',
     enterInstagramURL: 'Enter your Instagram URL',
     enterWebsiteURL: 'Enter your website URL',
@@ -282,5 +284,33 @@ export default {
         }
       }
     }
+  },
+  organization: {
+    registrationList: {
+      organizationEvents: 'Organization events',
+      screenTitle: 'Event Registrations',
+      searchByName: 'Search by name',
+      scanButtonLabel: 'Scan',
+      checkinSuccessToast: 'Check-in successful!',
+      checkinErrorToast: 'Failed to check in. Please try again.',
+      scanErrorToast: 'Invalid QR code',
+      confirmModalTitle: 'Event Check-In',
+      confirmModalDescription: 'Are you sure you want to check in this ticket?',
+      name: 'Name',
+      category: 'Category',
+      price: 'Price',
+      checkedIn: 'Checked in',
+      checkIn: 'Check In',
+      camera: {
+        requestingPermession: 'Requesting camera permissions',
+        cameraNotGranted: 'We need your permission to show the camera.',
+        grantPermession: 'Grant permission'
+      }
+    }
+  },
+  onBoarding: {
+    step1: 'Personal Details',
+    step2: 'Professional Details',
+    step3: 'Enhanced Networking'
   }
 }

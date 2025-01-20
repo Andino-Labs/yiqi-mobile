@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { CommunitiesType } from '@/types/communitiesType'
-import { ImageOff } from 'lucide-react-native'
+import { Calendar, ImageOff } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 
 interface CommunityCardProps {
   navigateToCommunity: (id: string) => void
@@ -12,8 +13,8 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
   community,
   navigateToCommunity
 }) => {
-  const { id, name, description, logo } = community
-
+  const { id, name, description, logo, eventCount } = community
+  const { t } = useTranslation()
   return (
     <TouchableOpacity
       onPress={() => navigateToCommunity(id)}
@@ -35,14 +36,21 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
         )}
       </View>
 
-      {/* Text Content */}
-      <View className="p-2 flex-1 flex flex-col justify-between">
+      <View className="p-2 flex-1 flex flex-col">
         <Text numberOfLines={1} className="text-gray-200 font-semibold mb-1">
           {name}
         </Text>
         <Text numberOfLines={3} className="text-gray-400 text-sm">
           {description}
         </Text>
+        {eventCount && (
+          <View className="flex-row items-center">
+            <Calendar size={16} color="white" />
+            <Text className="text-gray-300 text-sm my-2">
+              {eventCount} {t('general.events')}
+            </Text>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   )

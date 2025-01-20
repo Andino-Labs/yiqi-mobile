@@ -16,8 +16,9 @@ export default {
     apply: 'Aplicar',
     showMore: 'Ver todos',
     login: 'Entrar',
-    confirm: 'Excluir',
-    cancel: 'Cancelar'
+    delete: 'Excluir',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar'
   },
   loginScreen: {
     welcome: 'Bem-vindo ao Yiqi',
@@ -146,6 +147,7 @@ export default {
   profile: {
     profileSettings: 'Configurações do perfil',
     networking: 'Networking',
+    organizations: 'Organizations',
     language: 'Idioma',
     support: 'Suporte',
     privacyPolicy: 'Política de privacidade',
@@ -178,7 +180,7 @@ export default {
     tellUsAboutYourself: 'Fale-nos sobre você',
     setToPublic: 'Definir como público',
     User: 'Usuário',
-    profileSettings: 'Configurações de perfil',
+    screenTitle: 'Configurações de perfil',
     enterYourX: 'Digite sua URL X',
     enterInstagramURL: 'Digite sua URL do Instagram',
     enterWebsiteURL: 'Digite sua URL do site',
@@ -228,5 +230,33 @@ export default {
         }
       }
     }
+  },
+  organization: {
+    registrationList: {
+      organizationEvents: 'Eventos da organização',
+      screenTitle: 'Inscrições',
+      searchByName: 'Pesquisar',
+      scanButtonLabel: 'Escanear',
+      checkinSuccessToast: 'Participação confirmada!',
+      checkinErrorToast: 'Erro. Tente de novo.',
+      scanErrorToast: 'QR inválido',
+      confirmModalTitle: 'Confirmar participação',
+      confirmModalDescription: 'Confirmar este ingresso?',
+      name: 'Nome',
+      category: 'Categoria',
+      price: 'Preço',
+      checkedIn: 'Confirmado',
+      checkIn: 'Confirmar',
+      camera: {
+        requestingPermession: 'Solicitando permissões da câmera',
+        cameraNotGranted: 'Precisamos da sua permissão para mostrar a câmera.',
+        grantPermession: 'Conceder permissão'
+      }
+    }
+  },
+  onBoarding: {
+    step1: 'Detalhes pessoais',
+    step2: 'Detalhes profissionais',
+    step3: 'Rede aprimorada'
   }
 }

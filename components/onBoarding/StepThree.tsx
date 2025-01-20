@@ -58,8 +58,11 @@ export default function StepThree({
   })
   const { formState, handleSubmit } = form
   const { isDirty } = formState
+  const utils = trpc.useUtils()
 
-  const saveNetworkingProfile = trpc.saveNetworkingProfile.useMutation()
+  const saveNetworkingProfile = trpc.saveNetworkingProfile.useMutation({
+    onSuccess: () => utils.getUserProfile.invalidate()
+  })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [file, setFile] = useState<DocumentPickerAsset | undefined>()
 

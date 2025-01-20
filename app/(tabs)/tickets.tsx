@@ -59,7 +59,7 @@ export default function Events() {
   }, [isLoading])
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView edges={['top']} className="flex-1">
       <View className="flex-row items-center justify-between p-2">
         <Pressable onPress={() => router.back()}>
           <ChevronLeft color="white" size={24} />
@@ -70,7 +70,7 @@ export default function Events() {
         <View />
       </View>
       {authenticated ? (
-        <View className="flex-1 m-2">
+        <View className="flex-1 mx-2">
           <FlashList
             data={data}
             renderItem={({ item }) => (

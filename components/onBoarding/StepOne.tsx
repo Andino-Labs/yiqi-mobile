@@ -35,8 +35,10 @@ export default function StepOne({
   })
   const { formState, handleSubmit } = form
   const { isDirty } = formState
-
-  const updateUserProfile = trpc.updateUserProfile.useMutation()
+  const utils = trpc.useUtils()
+  const updateUserProfile = trpc.updateUserProfile.useMutation({
+    onSuccess: () => utils.getUserProfile.invalidate()
+  })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [file, setFile] = useState<ImagePickerAsset | undefined>()
   const { t } = useTranslation()

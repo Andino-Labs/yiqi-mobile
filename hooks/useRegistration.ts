@@ -37,7 +37,8 @@ export const useRegistration = (event: PublicEventType, user?: UserType) => {
       }
     }
     setIsLoadingRegistration(false)
-  }, [user?.email, checkExistingRegistration, event.id])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.email, event.id])
   useEffect(() => {
     checkRegistration()
   }, [checkRegistration, event.id, user?.email])

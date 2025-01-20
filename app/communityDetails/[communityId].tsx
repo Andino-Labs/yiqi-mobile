@@ -42,7 +42,12 @@ export default function CommunityDetails() {
 
   return (
     <>
-      <Stack.Screen options={{ title: organization.name || '' }} />
+      <Stack.Screen
+        options={{
+          title: organization.name || '',
+          headerBackTitleVisible: false
+        }}
+      />
       <Tabs.Container
         renderHeader={Header}
         renderTabBar={props => (

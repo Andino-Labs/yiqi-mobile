@@ -11,7 +11,9 @@ import {
   LogOut,
   User,
   LanguagesIcon,
-  CircleHelp
+  CircleHelp,
+  Building2,
+  ContactRound
 } from 'lucide-react-native'
 import { Select } from '@/components/ui/Select'
 import UserInfo from '@/components/Profile/UserInfo'
@@ -65,6 +67,7 @@ export default function Profile() {
     { label: t('profile.languages.fr'), value: 'fr' },
     { label: t('profile.languages.pt'), value: 'pt' }
   ]
+
   return (
     <SafeAreaView className="flex-1">
       {authenticated && user ? (
@@ -77,10 +80,21 @@ export default function Profile() {
               onPress={() => router.navigate('/settings/profileSettings')}
             />
             <Section
-              icon={<Settings {...iconProps} />}
+              icon={<ContactRound {...iconProps} />}
               text={t('profile.networking')}
               onPress={() => router.navigate('/settings/networkingSettings')}
             />
+            {user.role === 'ADMIN' && (
+              <Section
+                icon={<Building2 {...iconProps} />}
+                text={t('profile.organizations')}
+                onPress={() =>
+                  router.navigate(
+                    '/settings/organizationSection/OrganizationsList'
+                  )
+                }
+              />
+            )}
             <Section
               icon={<LanguagesIcon {...iconProps} />}
               text={t('profile.language')}

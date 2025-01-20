@@ -16,6 +16,7 @@ export default function NetWorkingSettings() {
         <Stack.Screen
           options={{
             headerShown: true,
+            headerBackTitleVisible: false,
             title: t('networkingSettings.networkingProfileTitle')
           }}
         />
