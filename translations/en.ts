@@ -84,7 +84,8 @@ export default {
     registrationPaymentPending: 'Payment Pending',
     registrationPaymentPendingDescription:
       'Your registration is pending payment. Please complete the payment to confirm your attendance.',
-    registrationContinuePayment: 'Continue with Payment'
+    registrationContinuePayment: 'Continue with Payment',
+    eventSoldOut: 'Sold Out'
   },
   Home: {
     HeroSection: {

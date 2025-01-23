@@ -12,7 +12,7 @@ interface TicketInfo {
   value?: string
 }
 const LabelValue = ({ label, value }: TicketInfo) => (
-  <View className="flex-row justify-between mb-1">
+  <View className="flex-row flex-wrap justify-between mb-1">
     <ThemedText className="text-neutral-400">{label}</ThemedText>
     <ThemedText className="text-neutral-200">{value}</ThemedText>
   </View>
@@ -25,7 +25,6 @@ export default function RegistrationList({
   onCheckInPress: (ticketId: string) => void
 }) {
   const { t } = useTranslation()
-  console.log(registrations)
 
   return (
     <Animated.ScrollView>
@@ -37,17 +36,14 @@ export default function RegistrationList({
             exiting={FadeOut}
             className={`rounded-md ${
               ticket.checkedInDate ? 'bg-green-900' : 'bg-neutral-800'
-            } border border-dashed  mb-3`}
+            } mb-3`}
           >
             <View className="p-2">
               <LabelValue
                 label={t('Registration.eventFormName')}
                 value={registration.user.name}
               />
-              <LabelValue
-                label={t('Registration.eventFormEmail')}
-                value={registration.user.email}
-              />
+              <LabelValue label={'Email'} value={registration.user.email} />
             </View>
             <TicketDashedLine />
             <View className="p-2">

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   TouchableOpacity,
   ActivityIndicator,
   Pressable
@@ -15,6 +14,10 @@ import RegistrationConfirmation from './RegistrationConfirmation'
 import RegistrationForm from './RegistrationForm'
 import Modal from '@/components/ui/Modal'
 import { UserType } from '@/schemas/userSchema'
+import { Colors } from '@/constants/Colors'
+import { ThemedText } from '@/components/ui/ThemedText'
+import Animated, { FadeIn } from 'react-native-reanimated'
+import { ThemedButton } from '@/components/ui/ThemedButton'
 
 type RegistrationProps = {
   event: PublicEventType
@@ -34,16 +37,20 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
     onSubmit,
     handlePaymentComplete,
     isPurchaseDisabled,
-    handleQuantityChange
+    handleQuantityChange,
+    ticketAvailability
   } = useRegistration(event, user)
 
   const { t } = useTranslation()
 
-  if (isLoadingRegistration) {
+  if (isLoadingRegistration || Object.keys(ticketAvailability).length === 0) {
     return (
-      <View className="flex-1 justify-center items-center bg-gray-900">
-        <ActivityIndicator size="large" color="#ffffff" />
-      </View>
+      <Animated.View
+        entering={FadeIn}
+        className="flex-1 h-[230px] justify-center items-center bg-gray-900"
+      >
+        <ActivityIndicator size="large" color={Colors.dark.tint} />
+      </Animated.View>
     )
   }
 
@@ -60,70 +67,81 @@ const Registration: React.FC<RegistrationProps> = ({ event, user }) => {
 
   return (
     <>
-      <View className="flex-1 bg-gray-800 p-4 rounded-lg">
-        <Text className="text-white text-lg font-bold mb-2">
+      <Animated.View
+        entering={FadeIn}
+        className="flex-1 bg-gray-800 p-4 rounded-lg"
+      >
+        <ThemedText className="text-lg font-bold mb-2">
           {t('Registration.eventRegistration')}
-        </Text>
-        <Text className="text-gray-400 text-sm mb-4">
+        </ThemedText>
+        <ThemedText className="text-gray-400 text-sm mb-4">
           {isFreeEvent
             ? t('Registration.eventFreeRegistrationDescription')
             : t('Registration.eventNoTicketsSelected')}
-        </Text>
+        </ThemedText>
         <View className="h-px bg-gray-700 my-3" />
 
         {event.tickets?.map(ticket => (
           <View
             key={ticket.id}
-            className="flex-row justify-between items-center mb-4"
+            className="flex-row items-center justify-between mb-4"
           >
             <View className="flex-1">
-              <Text className="text-white font-bold flex-wrap">
+              <ThemedText className="font-bold flex-wrap">
                 {ticket.name}
-              </Text>
-              <Text className="text-gray-400 text-sm flex-wrap">
-                {ticket.description}
-              </Text>
+              </ThemedText>
+              {ticket.description && (
+                <ThemedText className="text-gray-400 text-sm flex-wrap">
+                  {ticket.description}
+                </ThemedText>
+              )}
             </View>
 
-            <View className="flex-row items-center">
-              <TouchableOpacity
-                onPress={() => handleQuantityChange(ticket.id, -1)}
-              >
-                <Ionicons
-                  name="remove-circle-outline"
-                  size={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-              <Text className="text-white mx-2">
-                {ticketSelections[ticket.id] || 0}
-              </Text>
-              <TouchableOpacity
-                onPress={() => handleQuantityChange(ticket.id, 1)}
-              >
-                <Ionicons name="add-circle-outline" size={24} color="white" />
-              </TouchableOpacity>
-            </View>
-            <Text className="text-white font-bold ml-2">S/{ticket.price}</Text>
+            {ticketAvailability[ticket.id] >= 1 ? (
+              <View className="flex-row items-center">
+                <TouchableOpacity
+                  onPress={() => handleQuantityChange(ticket.id, -1)}
+                >
+                  <Ionicons
+                    name="remove-circle-outline"
+                    size={24}
+                    color="white"
+                  />
+                </TouchableOpacity>
+                <ThemedText className="mx-2">
+                  {ticketSelections[ticket.id] || 0}
+                </ThemedText>
+                <TouchableOpacity
+                  onPress={() => handleQuantityChange(ticket.id, 1)}
+                >
+                  <Ionicons name="add-circle-outline" size={24} color="white" />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <ThemedText className="rounded-2xl text-sm p-1 mr-2 bg-red-600">
+                {t('Registration.eventSoldOut')}
+              </ThemedText>
+            )}
+            <ThemedText className="font-bold ml-2">S/{ticket.price}</ThemedText>
           </View>
         ))}
 
-        <TouchableOpacity
-          className="p-3 rounded-lg mt-4"
+        <ThemedButton
+          buttonClassName="p-3 mt-4 border-0"
           onPress={() => setModalVisible(true)}
           disabled={isPurchaseDisabled}
+          textClassName="text-black"
           style={{
-            backgroundColor: isPurchaseDisabled ? '#4B5563' : '#0a7ea4',
+            backgroundColor: isPurchaseDisabled ? '#0a7ea4' : '#04F1FF',
             opacity: isPurchaseDisabled ? 0.6 : 1
           }}
-        >
-          <Text className="text-white text-center">
-            {isFreeEvent
+          text={
+            isFreeEvent
               ? t('Registration.eventRegister')
-              : t('Registration.eventPurchase')}
-          </Text>
-        </TouchableOpacity>
-      </View>
+              : t('Registration.eventPurchase')
+          }
+        />
+      </Animated.View>
 
       <Modal isOpen={isModalVisible} onDismiss={() => setModalVisible(false)}>
         <View className="bg-gray-800 p-4 rounded-lg">

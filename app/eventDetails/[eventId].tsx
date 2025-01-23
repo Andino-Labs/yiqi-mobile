@@ -27,7 +27,7 @@ import { errorHandler } from '@/helpers/errorHandler'
 
 export default function EventDetails() {
   const { eventId } = useLocalSearchParams<{ eventId: string }>()
-  const { data, error, isLoading } = trpc.getEvent.useQuery({
+  const { data, isLoading } = trpc.getEvent.useQuery({
     eventId,
     includeTickets: true
   })
@@ -43,28 +43,8 @@ export default function EventDetails() {
       ).catch(errorHandler)
   }
 
-  if (isLoading) {
-    return (
-      <SafeAreaView className="flex-1 justify-center items-center">
-        <ActivityIndicator
-          className=" py-2"
-          size="large"
-          color={Colors.dark.tint}
-        />
-      </SafeAreaView>
-    )
-  }
-
-  if (error) {
-    return (
-      <SafeAreaView className="flex-1 justify-center items-center">
-        <Text className="text-red-500">Failed to load event details.</Text>
-      </SafeAreaView>
-    )
-  }
-
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
+    <SafeAreaView className="flex-1 px-5 py-2">
       <Stack.Screen
         options={{
           title: data?.title || '',
@@ -76,78 +56,89 @@ export default function EventDetails() {
           )
         }}
       />
-      <SafeAreaView className="flex-1 px-5 py-2">
-        {/* Event Image */}
-        {data?.openGraphImage && (
-          <View className="mb-5">
-            <Image
-              className="w-full h-48 rounded-lg"
-              contentFit="cover"
-              source={{ uri: data.openGraphImage }}
-            />
-          </View>
-        )}
+      {isLoading || !data ? (
+        <ActivityIndicator
+          className=" py-2"
+          size="large"
+          color={Colors.dark.tint}
+        />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentInsetAdjustmentBehavior="automatic"
+        >
+          {/* Event Image */}
+          {data?.openGraphImage && (
+            <View className="mb-5">
+              <Image
+                className="w-full h-48 rounded-lg"
+                contentFit="cover"
+                source={{ uri: data.openGraphImage }}
+              />
+            </View>
+          )}
 
-        {/* Event Title */}
-        <ThemedText className="text-white text-2xl font-bold mb-2">
-          {data?.title}
-        </ThemedText>
-
-        {/* Event Date and Location */}
-        <View className="mb-5">
-          <View className="flex-row items-center mb-1">
-            <Ionicons
-              name="calendar"
-              size={18}
-              color="white"
-              className="mr-2"
-            />
-            <Text className="text-white text-sm">
-              {data.startDate.toLocaleDateString()},{' '}
-              {data.startDate.toLocaleTimeString()} -{' '}
-              {data.endDate.toLocaleTimeString()}
-            </Text>
-          </View>
-          <View className="flex-row">
-            {data.location && data.city && (
-              <React.Fragment>
-                <MaterialIcons
-                  name="location-on"
-                  size={18}
-                  color="white"
-                  className="mr-2"
-                />
-                <Text numberOfLines={1} className="text-white text-sm">
-                  {data.location}, {data.city}
-                </Text>
-              </React.Fragment>
-            )}
-          </View>
-        </View>
-
-        {/* Divider */}
-        <View className="h-px bg-gray-700 my-5" />
-        <ThemedText className="text-white text-2xl font-bold mb-2">
-          {t('Event.eventAbout')}
-        </ThemedText>
-        <EventDescription description={data.description} />
-
-        {/* Divider */}
-        <View className="h-px bg-gray-700 my-5" />
-        {/* Registration Section */}
-        {data && <Registration event={data as PublicEventType} user={user} />}
-        {/* Divider */}
-        <View className="h-px bg-gray-700 my-5" />
-        <ThemedText className="text-white text-2xl font-bold mb-2">
-          {t('Event.location')}
-        </ThemedText>
-        <TouchableOpacity onPress={openMaps}>
-          <ThemedText className="text-white text-sm font-bold mb-2">
-            {data.location}
+          {/* Event Title */}
+          <ThemedText className="text-white text-2xl font-bold mb-2">
+            {data?.title}
           </ThemedText>
-        </TouchableOpacity>
-        <LocationMap coordinates={data.latLon} />
-      </SafeAreaView>
-    </ScrollView>
+
+          {/* Event Date and Location */}
+          <View className="mb-5">
+            <View className="flex-row items-center mb-1">
+              <Ionicons
+                name="calendar"
+                size={18}
+                color="white"
+                className="mr-2"
+              />
+              <Text className="text-white text-sm">
+                {data.startDate.toLocaleDateString()},{' '}
+                {data.startDate.toLocaleTimeString()} -{' '}
+                {data.endDate.toLocaleTimeString()}
+              </Text>
+            </View>
+            <View className="flex-row">
+              {data.location && data.city && (
+                <React.Fragment>
+                  <MaterialIcons
+                    name="location-on"
+                    size={18}
+                    color="white"
+                    className="mr-2"
+                  />
+                  <Text numberOfLines={1} className="text-white text-sm">
+                    {data.location}, {data.city}
+                  </Text>
+                </React.Fragment>
+              )}
+            </View>
+          </View>
+
+          {/* Divider */}
+          <View className="h-px bg-gray-700 my-5" />
+          <ThemedText className="text-white text-2xl font-bold mb-2">
+            {t('Event.eventAbout')}
+          </ThemedText>
+          <EventDescription description={data.description} />
+
+          {/* Divider */}
+          <View className="h-px bg-gray-700 my-5" />
+          {/* Registration Section */}
+          {data && <Registration event={data as PublicEventType} user={user} />}
+          {/* Divider */}
+          <View className="h-px bg-gray-700 my-5" />
+          <ThemedText className="text-white text-2xl font-bold mb-2">
+            {t('Event.location')}
+          </ThemedText>
+          <TouchableOpacity onPress={openMaps}>
+            <ThemedText className="text-white text-sm font-bold mb-2">
+              {data.location}
+            </ThemedText>
+          </TouchableOpacity>
+          <LocationMap coordinates={data.latLon} />
+        </ScrollView>
+      )}
+    </SafeAreaView>
   )
 }

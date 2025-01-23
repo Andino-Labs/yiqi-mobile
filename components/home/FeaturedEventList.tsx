@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/ui/ThemedText'
 import { useTranslation } from 'react-i18next'
 import { FlashList, ListRenderItem } from '@shopify/flash-list'
 import { ThemedView } from '@/components/ui/ThemedView'
+import trpc from '@/constants/trpc'
 
 interface FeaturedEventListProps {
   events?: PublicEventType[]
@@ -14,14 +15,27 @@ interface FeaturedEventListProps {
 export default function FeaturedEventList({ events }: FeaturedEventListProps) {
   const router = useRouter()
   const { t } = useTranslation()
+  const utils = trpc.useUtils()
 
   const onEventPress = useCallback(
-    async (eventId: string) =>
+    async (eventId: string) => {
+      const cachedEvent = utils.getEvent.getData({
+        eventId,
+        includeTickets: true
+      })
+      if (!cachedEvent) {
+        try {
+          await utils.getEvent.prefetch({ eventId, includeTickets: true })
+        } catch (err) {
+          console.error('Prefetch failed:', err)
+        }
+      }
       router.push({
         pathname: '/eventDetails/[eventId]',
         params: { eventId }
-      }),
-    [router]
+      })
+    },
+    [router, utils]
   )
   const keyExtractor = useCallback(
     (item: PublicEventType, index: number) => item.id + index.toString(),
@@ -39,7 +53,7 @@ export default function FeaturedEventList({ events }: FeaturedEventListProps) {
   )
   return (
     <>
-      <ThemedView className="flex-row justify-between px-4 mt-4">
+      <ThemedView className="flex-row justify-between px-4 my-4">
         <ThemedText className="text-white text-lg font-semibold ">
           {t('Home.eventsNear')}
         </ThemedText>

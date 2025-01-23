@@ -59,9 +59,10 @@ const LocationMap: React.FC<LocationMapProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 300, // Adjust as needed
+    height: 200, // Adjust as needed
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 10
   }
 })
 

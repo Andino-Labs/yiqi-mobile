@@ -84,7 +84,8 @@ export default {
     registrationPaymentPending: 'Pagamento pendente',
     registrationPaymentPendingDescription:
       'Sua inscrição está pendente de pagamento. Complete o pagamento para confirmar sua presença.',
-    registrationContinuePayment: 'Continuar com o pagamento'
+    registrationContinuePayment: 'Continuar com o pagamento',
+    eventSoldOut: 'Esgotado'
   },
   Home: {
     HeroSection: {

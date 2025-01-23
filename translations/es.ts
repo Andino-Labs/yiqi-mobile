@@ -87,7 +87,8 @@ export default {
     stripeAccountActive: 'Cuenta de Stripe activa',
     stripeAccountActiveDescription:
       'Tu cuenta de Stripe está completamente configurada y lista para aceptar pagos.',
-    stripeViewDashboard: 'Ver panel de Stripe'
+    stripeViewDashboard: 'Ver panel de Stripe',
+    eventSoldOut: 'Agotado'
   },
   Home: {
     HeroSection: {
