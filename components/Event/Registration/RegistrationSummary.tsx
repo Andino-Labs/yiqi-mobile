@@ -6,7 +6,7 @@ import { View, Text } from 'react-native'
 interface RegistrationSummaryProps {
   tickets?: TicketType[]
   ticketSelections: Record<string, number>
-  calculateTotal: () => number
+  calculateTotal: number
 }
 
 export default function RegistrationSummary({
@@ -42,7 +42,7 @@ export default function RegistrationSummary({
             {t('Registration.eventTotal')}
           </Text>
           <Text className="text-base font-bold text-white">
-            S/{calculateTotal().toFixed(2)}
+            S/{calculateTotal.toFixed(2)}
           </Text>
         </View>
       </View>

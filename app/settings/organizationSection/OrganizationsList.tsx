@@ -17,7 +17,6 @@ export default function OrganizationsList() {
       params: { organizationId }
     })
   const { t } = useTranslation()
-  console.log(data)
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">

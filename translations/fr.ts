@@ -84,7 +84,8 @@ export default {
     registrationPaymentPending: 'Paiement en attente',
     registrationPaymentPendingDescription:
       'Votre inscription est en attente de paiement. Veuillez compléter le paiement pour confirmer votre participation.',
-    registrationContinuePayment: 'Continuer avec le paiement'
+    registrationContinuePayment: 'Continuer avec le paiement',
+    eventSoldOut: 'Épuisé'
   },
   Home: {
     HeroSection: {
